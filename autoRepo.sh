@@ -1,22 +1,30 @@
-#! /bin/bash
+#!/bin/bash
 
+# GitHub username
+GITHUB_USER="toughdave"
+
+# Get repository name from argument or prompt
 repoName=$1
-
-while [ -z $repoName ]
+while [ -z "$repoName" ]
 do
     echo "Please provide a repository name"
-    read -r -p $"Repository Name: " repoName
+    read -r -p "Repository Name: " repoName
 done
 
+# Create README file
 echo "# $repoName" >> README.md
+
+# Initialize git
 git init
 git add .
 git commit -m "First commit"
 
-curl -u toughdave https://api.github.com/user/repos -d '{"name": "'"$repoName"'", "private":false}'
+# Create repository on GitHub using SSH key authentication
+# Note: Make sure you have gh cli installed: sudo apt install gh
+# And authenticated: gh auth login
+gh repo create "$repoName" --public --confirm
 
-GIT_URL=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/toughdave/"$repoName" | jq -r '.clone_url')
-
+# Configure remote with SSH URL
 git branch -M main
-git remote add origin $GIT_URL
+git remote add origin "git@github.com:$GITHUB_USER/$repoName.git"
 git push -u origin main
