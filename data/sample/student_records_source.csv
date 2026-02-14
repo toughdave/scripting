@@ -1,0 +1,7 @@
+student_id,first_name,last_name,email,department,admission_year,score,status,due_date,completed_at
+STU001,Alice,Nguyen,alice.nguyen@example.edu,Computer Science,2022,78,open,2026-02-10,2026-02-08
+STU002,Bob,Mensah,bob.mensah@example.edu,Mathematics,2022,92,open,2026-02-09,
+STU003,Chidi,Okoro,chidi.okoro@example.edu,Physics,2021,,open,2026-02-07,
+STU004,Diana,Smith,diana.smith@example.edu,Chemistry,2022,65,closed,2026-02-06,2026-02-10
+STU004,Diana,Smith,diana.s@example.edu,Chemistry,2022,65,closed,2026-02-06,2026-02-10
+STU005,Emeka,Johnson,emeka.j@example.edu,Biology,2020,44,open,2026-02-08,2026-02-12

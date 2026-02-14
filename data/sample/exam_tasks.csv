@@ -1,0 +1,7 @@
+task_id,owner,checkpoint,status,due_date,completed_at,priority
+TSK001,Ops Team,Device Compliance,open,2026-02-08,,high
+TSK002,Invigilation,Hall Readiness,in_progress,2026-02-10,,medium
+TSK003,Network Team,CCTV Connectivity,completed,2026-02-07,2026-02-06,high
+TSK004,Support Team,Biometric Calibration,open,2026-02-09,,high
+TSK005,Facilities,Power Backup Check,completed,2026-02-05,2026-02-07,medium
+TSK006,Audit Desk,Evidence Packet Review,open,2026-02-11,,low

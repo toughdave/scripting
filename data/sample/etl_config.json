@@ -1,0 +1,18 @@
+{
+  "source_csv": "student_records_source.csv",
+  "output_csv": "../../output/student_records_etl.csv",
+  "summary_json": "../../reports/etl_summary.json",
+  "required_columns": [
+    "student_id",
+    "email",
+    "department",
+    "status"
+  ],
+  "date_columns": [
+    "due_date",
+    "completed_at"
+  ],
+  "drop_duplicates_by": [
+    "student_id"
+  ]
+}
