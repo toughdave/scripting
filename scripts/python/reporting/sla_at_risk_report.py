@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate an SLA at-risk report from checkpoint/task data."""
+"""Generate SLA risk reports for admissions/exam operations checkpoint queues."""
 
 from __future__ import annotations
 
@@ -26,7 +26,12 @@ def parse_date(value: str | None) -> date | None:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Create SLA at-risk and overdue report from CSV.")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Create at-risk/overdue checkpoint report from operational task queues "
+            "such as exam readiness, compliance checks, and reporting deadlines."
+        )
+    )
     parser.add_argument("--input", required=True, help="Input tasks CSV")
     parser.add_argument("--output", required=True, help="Output at-risk CSV")
     parser.add_argument("--summary", required=True, help="Output summary JSON")

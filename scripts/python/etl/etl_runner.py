@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Config-driven CSV ETL runner (extract -> transform -> validate -> load)."""
+"""Config-driven ETL for admissions/result CSV pipelines (extract -> transform -> validate -> load)."""
 
 from __future__ import annotations
 
@@ -43,7 +43,12 @@ def resolve_path(base_dir: Path, raw_path: str) -> Path:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Run ETL pipeline from JSON config.")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Run ETL for operational academic datasets using JSON configuration "
+            "(cleaning, date normalization, required-field checks, and dedupe)."
+        )
+    )
     parser.add_argument("--config", required=True, help="Path to ETL config JSON")
     parser.add_argument(
         "--apply",

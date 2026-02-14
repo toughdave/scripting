@@ -3,5 +3,24 @@ STU001,Alice,Nguyen,alice.nguyen@example.edu,Computer Science,2022,78,open,2026-
 STU002,Bob,Mensah,bob.mensah@example.edu,Mathematics,2022,92,open,2026-02-09,
 STU003,Chidi,Okoro,chidi.okoro@example.edu,Physics,2021,,open,2026-02-07,
 STU004,Diana,Smith,diana.smith@example.edu,Chemistry,2022,65,closed,2026-02-06,2026-02-10
-STU004,Diana,Smith,diana.s@example.edu,Chemistry,2022,65,closed,2026-02-06,2026-02-10
 STU005,Emeka,Johnson,emeka.j@example.edu,Biology,2020,44,open,2026-02-08,2026-02-12
+STU006,Fatima,Bello,fatima.bello@example.edu,Statistics,2023,81,open,2026-02-11,
+STU007,Grace,Adeyemi,grace.adeyemi@example.edu,Economics,2021,88,completed,2026-02-12,2026-02-11
+STU008,Hamza,Yusuf,hamza.yusuf@example.edu,Computer Engineering,2022,73,in_progress,2026-02-13,
+STU009,Ifeoma,Udo,ifeoma.udo@example.edu,Information Systems,2020,95,completed,2026-02-08,2026-02-08
+STU010,Jacob,Obi,jacob.obi@example.edu,Civil Engineering,2021,59,open,2026-02-05,
+STU010,Jacob,Obi,jacob.obi.alt@example.edu,Civil Engineering,2021,59,open,2026-02-05,
+STU011,Kemi,Afolabi,kemi.afolabi@example.edu,Accounting,2023,67,open,2026-02-14,
+STU012,Luis,Gomez,luis.gomez@example.edu,Mechanical Engineering,2022,83,closed,2026-02-03,2026-02-01
+STU013,Mary,Nwosu,mary.nwosu@example.edu,Law,2023,0,open,2026-02-15,
+STU014,Nia,Patel,nia.patel@example.edu,Nursing,2024,91,completed,2026-02-10,2026-02-10
+STU015,Omar,Farouk,omar.farouk@example.edu,Architecture,2021,48,pending_review,2026-02-09,
+STU016,Priya,Singh,priya.singh@example.edu,Computer Science,2024,76,in_progress,2026-02-16,
+STU017,Qiang,Lee,qiang.lee@example.edu,Data Science,2023,85,open,2026-02-18,
+STU018,Ruth,Danjuma,ruth.danjuma@example.edu,Public Administration,2022,62,closed,2026-02-04,2026-02-05
+STU019,Samuel,Eze,samuel.eze@example.edu,Nursing,2020,54,open,2026-02-07,2026-02-09
+STU020,Tolu,Ibrahim,tolu.ibrahim@example.edu,Cybersecurity,2024,89,completed,2026-02-17,2026-02-15
+STU021,Uche,Okafor,,Computer Science,2022,72,open,2026-02-11,
+STU022,Vera,Chen,vera.chen@example.edu,,2021,79,open,2026-02-12,
+STU023,Will,Brown,will.brown@example.edu,Mathematics,2022,-4,open,2026-02-12,
+STU024,Xena,Ali,xena.ali@example.edu,Physics,2022,106,open,2026-02-12,

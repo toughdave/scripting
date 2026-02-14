@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Capture a lightweight system health snapshot (CPU, memory, disk, platform)."""
+"""Capture lightweight host health snapshots for reporting and exam-cycle readiness checks."""
 
 from __future__ import annotations
 
@@ -16,7 +16,12 @@ def bytes_to_gb(value: int | float) -> float:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Write system health snapshot JSON.")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Write host health snapshot JSON (CPU, memory, disk, platform) "
+            "for operational run logs."
+        )
+    )
     parser.add_argument("--output", required=True, help="Output JSON path")
     return parser.parse_args()
 

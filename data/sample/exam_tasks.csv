@@ -5,3 +5,15 @@ TSK003,Network Team,CCTV Connectivity,completed,2026-02-07,2026-02-06,high
 TSK004,Support Team,Biometric Calibration,open,2026-02-09,,high
 TSK005,Facilities,Power Backup Check,completed,2026-02-05,2026-02-07,medium
 TSK006,Audit Desk,Evidence Packet Review,open,2026-02-11,,low
+TSK007,Admissions Office,Applicant Identity Recheck,in_progress,2026-02-12,,high
+TSK008,Results Unit,Grade Sheet Consolidation,open,2026-02-13,,high
+TSK009,Registry,Result Approval Pack Assembly,open,2026-02-14,,high
+TSK010,Database Team,Result Backup Verification,completed,2026-02-09,2026-02-09,medium
+TSK011,QA Desk,Anomaly Revalidation,open,2026-02-10,,medium
+TSK012,Security Team,Exam Hall Access Audit,completed,2026-02-08,2026-02-08,high
+TSK013,Compliance Unit,CCTV Evidence Hashing,open,2026-02-15,,medium
+TSK014,IT Support,Biometric Device Firmware Check,in_progress,2026-02-16,,high
+TSK015,Reporting Team,Leadership KPI Snapshot,open,2026-02-17,,medium
+TSK016,Helpdesk,Candidate Ticket Clearance,completed,2026-02-11,2026-02-12,low
+TSK017,Network Team,Switch Port Validation,open,2026-02-12,,medium
+TSK018,Ops Team,Exam Script Pickup Chain Log,open,2026-02-18,,low

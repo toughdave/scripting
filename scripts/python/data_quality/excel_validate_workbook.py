@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Excel workbook sheets, required columns, and allowed values."""
+"""Validate operational Excel workbooks used for admissions/results review cycles."""
 
 from __future__ import annotations
 
@@ -32,7 +32,12 @@ def parse_allowed_values(entries: list[str]) -> dict[tuple[str, str], set[str]]:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Validate Excel workbook structure and data rules.")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Validate workbook structure and business rules for records operations "
+            "(required tabs, mandatory columns, and allowed status/category values)."
+        )
+    )
     parser.add_argument("--workbook", required=True, help="Path to .xlsx workbook")
     parser.add_argument(
         "--required-sheets",

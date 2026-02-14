@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Profile a CSV file and output column-level quality stats as JSON."""
+"""Profile admissions/results CSV extracts and output column-level quality stats as JSON."""
 
 from __future__ import annotations
 
@@ -64,9 +64,14 @@ def profile_csv(input_path: Path) -> dict[str, Any]:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Profile CSV columns and output JSON stats.")
-    parser.add_argument("--input", required=True, help="Path to source CSV file")
-    parser.add_argument("--output", required=True, help="Path to write JSON profile")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Profile operational CSV exports (student records, admissions batches, "
+            "result sheets) and write quality statistics as JSON."
+        )
+    )
+    parser.add_argument("--input", required=True, help="Path to source CSV extract")
+    parser.add_argument("--output", required=True, help="Path to write profiling JSON")
     return parser.parse_args()
 
 

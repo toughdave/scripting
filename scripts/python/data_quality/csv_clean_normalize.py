@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Clean and normalize a CSV file (trim, header normalization, optional dedupe/date cleanup)."""
+"""Clean and normalize student/admissions CSV extracts for consistent downstream reporting."""
 
 from __future__ import annotations
 
@@ -38,19 +38,24 @@ def normalize_date(value: str) -> str:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Clean and normalize CSV content.")
-    parser.add_argument("--input", required=True, help="Input CSV path")
-    parser.add_argument("--output", required=True, help="Output CSV path")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Clean admissions/result-operation CSV content by trimming values, "
+            "normalizing headers, standardizing dates, and optionally removing duplicates."
+        )
+    )
+    parser.add_argument("--input", required=True, help="Input CSV extract path")
+    parser.add_argument("--output", required=True, help="Output normalized CSV path")
     parser.add_argument(
         "--date-columns",
         nargs="*",
         default=[],
-        help="Columns to normalize to YYYY-MM-DD",
+        help="Columns to normalize to YYYY-MM-DD (for due/completion timelines)",
     )
     parser.add_argument(
         "--drop-duplicates",
         action="store_true",
-        help="Drop duplicate records using --dedupe-keys",
+        help="Drop duplicate records using --dedupe-keys (for repeated IDs or imported retries)",
     )
     parser.add_argument(
         "--dedupe-keys",

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reconcile source and target student records by key and comparison columns."""
+"""Reconcile admissions/result student records across source and target datasets."""
 
 from __future__ import annotations
 
@@ -40,11 +40,16 @@ def index_rows(rows: list[dict[str, str]], key: str) -> tuple[dict[str, dict[str
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Reconcile student records between source and target CSVs.")
-    parser.add_argument("--source", required=True, help="Source CSV path")
-    parser.add_argument("--target", required=True, help="Target CSV path")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Reconcile student records between upstream operational extracts "
+            "and downstream reporting/approval datasets."
+        )
+    )
+    parser.add_argument("--source", required=True, help="Source CSV path (e.g., admissions/result operations)")
+    parser.add_argument("--target", required=True, help="Target CSV path (e.g., reporting or approved register)")
     parser.add_argument("--output", required=True, help="Output reconciliation CSV")
-    parser.add_argument("--summary", required=True, help="Output summary JSON")
+    parser.add_argument("--summary", required=True, help="Output reconciliation summary JSON")
     parser.add_argument("--key", default="student_id", help="Record key column")
     parser.add_argument(
         "--compare-columns",

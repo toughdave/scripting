@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build an audit packet from a CSV (cleaned export, anomalies, summary, optional XLSX)."""
+"""Build admissions/results audit packets from CSV extracts for review and sign-off cycles."""
 
 from __future__ import annotations
 
@@ -26,10 +26,15 @@ def write_csv(path: Path, rows: list[dict[str, Any]], fieldnames: list[str]) -> 
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Export CSV audit packet artifacts.")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Export audit packet artifacts (clean dataset, anomaly register, summary, optional workbook) "
+            "for operational review workflows."
+        )
+    )
     parser.add_argument("--input", required=True, help="Input CSV path")
     parser.add_argument("--output-dir", required=True, help="Audit packet directory")
-    parser.add_argument("--key-column", default="student_id", help="Primary key column")
+    parser.add_argument("--key-column", default="student_id", help="Primary identity column")
     parser.add_argument("--score-column", default="score", help="Numeric score column")
     parser.add_argument("--low-score-threshold", type=float, default=50.0, help="Low score threshold")
     return parser.parse_args()

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run lightweight DB connectivity smoke tests for SQLite/MySQL/Postgres."""
+"""Run lightweight database readiness checks for reporting/admissions processing windows."""
 
 from __future__ import annotations
 
@@ -11,7 +11,12 @@ from pathlib import Path
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="DB smoke tests")
+    parser = argparse.ArgumentParser(
+        description=(
+            "Run quick DB reachability checks for SQLite, MySQL, and Postgres endpoints "
+            "used by operational data workflows."
+        )
+    )
     parser.add_argument("--output", required=True, help="Output summary JSON")
     parser.add_argument("--sqlite-path", default="", help="SQLite DB file path")
     parser.add_argument("--mysql-host", default="", help="MySQL host")
