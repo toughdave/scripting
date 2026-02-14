@@ -2,26 +2,14 @@
 
 Operational scripting toolkit built from hands-on academic IT and instructional operations.
 
-## Why this repository exists
+## Overview
 
-This repository captures the scripting patterns I used and refined across two core roles:
+This repository packages repeatable scripting workflows used for academic data operations, reporting preparation, and routine system checks.
+The focus is reliability, auditability, and cross-platform execution across Linux and Windows.
 
-- **Systems & Data Analyst / System Programmer (FUTA, 2017-2023)** supporting admissions, examinations, results processing, and reporting workflows at scale
-- **Computer Technology Instructor (Pures College, 2024-2025)** teaching practical systems administration, networking, and data workflow implementation in lab environments
+## Operational scope
 
-The goal is simple: turn recurring operations into reliable, auditable, and repeatable workflows across Linux and Windows, with outputs that can stand up to operational review.
-
-## Professional profile
-
-- Information Systems Analyst and Computer Science professional (MSc)
-- Experience supporting large academic IT operations handling **4,000+ student records/users**
-- Delivered data processing automation with Python, MySQL, Excel, and Google Sheets
-- Built workflows for reconciliation, result integrity checks, and audit-ready reporting
-- Managed practical IT instruction and assessment workflows for **250+ students**
-
-## Professional context behind the scripts
-
-These scripts reflect day-to-day operational needs from environments with high-volume records, strict reporting timelines, and compliance-sensitive processes:
+Core operational patterns covered in this toolkit:
 
 - reconciliation of admissions and results records between operational extracts and approved reporting outputs
 - data quality checks before grade publication windows and committee sign-off
@@ -30,28 +18,13 @@ These scripts reflect day-to-day operational needs from environments with high-v
 - audit packet preparation for leadership, registry, and quality-assurance review teams
 - lightweight system and database smoke checks before reporting cycles
 
-## What this toolkit is used for now
+## Current use cases
 
 - building reusable data-quality routines for CSV/Excel pipelines
 - validating key records and catching duplicates, nulls, and status anomalies early
 - documenting reconciliation outcomes for transparent decision-making and approvals
 - supporting analytics preparation for Power BI/Excel reporting layers
 - creating cross-platform workflows that can run as scheduled jobs
-
-## How these scripts were applied in practice
-
-### Systems & Data Analyst / System Programmer
-
-- supported recurring admissions and examination data cycles with Python, MySQL, Excel, and Google Sheets
-- reduced manual record handling risk through repeatable validation, reconciliation, and ETL routines
-- used discrepancy reports and integrity checks to prepare result data before publication workflows
-- supported operational systems handling 4,000+ records/users, where repeatability and auditability were essential
-
-### Computer Technology Instructor
-
-- used script-driven data validation examples to teach practical SQL/Python workflows
-- adapted the same reconciliation and quality-check patterns for student lab assignments and project assessments
-- reinforced operational thinking: validate inputs, detect anomalies early, and produce traceable outputs
 
 ## Business and enterprise applicability
 
@@ -158,7 +131,7 @@ python scripts/python/etl/etl_runner.py \
 
 ## Portfolio alignment
 
-This toolkit maps directly to the types of projects I have delivered:
+This toolkit maps directly to portfolio project types such as:
 
 1. **Academic Results Analytics Dashboard**
    - feeds cleaner, validated datasets into BI layers
@@ -179,34 +152,3 @@ This toolkit maps directly to the types of projects I have delivered:
 - Scripts default to safe/read-only behavior where possible.
 - Keep generated outputs in `output/`, `reports/`, or `artifacts/` (already gitignored).
 - Use `scripts/workflow/schedule_daily_run.sh` (Linux) or `scripts/workflow/schedule_daily_run.ps1` (Windows) for full routine execution.
-
-## Implemented scripts and templates
-
-- SQL quality checks:
-  - `scripts/sql/mysql/mysql_validate_results_integrity.sql`
-  - `scripts/sql/postgres/postgres_validate_results_integrity.sql`
-  - `scripts/sql/sqlite/sqlite_validate_results_integrity.sql`
-  - `scripts/sql/mysql/mysql_find_duplicates_by_keys.sql`
-  - `scripts/sql/postgres/postgres_find_duplicates_by_keys.sql`
-  - `scripts/sql/sqlite/sqlite_find_duplicates_by_keys.sql`
-  - `scripts/sql/templates/sql_reconciliation_diff_template.sql`
-- Python scripts:
-  - `scripts/python/data_quality/csv_profile.py`
-  - `scripts/python/data_quality/csv_clean_normalize.py`
-  - `scripts/python/data_quality/excel_validate_workbook.py`
-  - `scripts/python/etl/etl_runner.py`
-  - `scripts/python/reconciliation/reconcile_students.py`
-  - `scripts/python/reporting/sla_at_risk_report.py`
-  - `scripts/python/reporting/excel_export_audit_packet.py`
-  - `scripts/python/systems/system_health_snapshot.py`
-  - `scripts/python/systems/db_smoke_test.py`
-- Workflow wrappers:
-  - `scripts/workflow/schedule_daily_run.sh`
-  - `scripts/workflow/schedule_daily_run.ps1`
-- BI/spreadsheet templates:
-  - `powerbi/powerquery/powerquery_data_quality_template.pq`
-  - `google-sheets/apps-script/apps_script_validation_rules.gs`
-- Demo datasets and DB seeds:
-  - `data/sample/*.csv`
-  - `data/sample/etl_config.json`
-  - `data/seed/sql_seed_demo_academic_dataset/{mysql.sql,postgres.sql,sqlite.sql}`
