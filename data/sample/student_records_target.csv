@@ -1,21 +1,141 @@
 student_id,first_name,last_name,email,department,admission_year,score,status,due_date,completed_at
-STU001,Alice,Nguyen,alice.nguyen@example.edu,Computer Science,2022,78,closed,2026-02-10,2026-02-08
-STU002,Bob,Mensah,bob.mensah@example.edu,Mathematics,2022,90,open,2026-02-09,
-STU003,Chidi,Okoro,chidi.okoro@example.edu,Physics,2021,56,open,2026-02-07,
-STU004,Diana,Smith,diana.smith@example.edu,Chemistry,2022,65,closed,2026-02-06,2026-02-10
-STU006,Fatima,Bello,fatima.bello@example.edu,Statistics,2023,81,open,2026-02-11,
-STU007,Grace,Adeyemi,grace.adeyemi@example.edu,Economics,2021,88,completed,2026-02-12,2026-02-11
-STU008,Hamza,Yusuf,hamza.yusuf@example.edu,Computer Engineering,2022,75,in_progress,2026-02-13,
-STU009,Ifeoma,Udo,ifeoma.udo@example.edu,Information Systems,2020,95,completed,2026-02-08,2026-02-08
-STU011,Kemi,Afolabi,kemi.afolabi@example.edu,Accounting,2023,67,open,2026-02-14,
-STU012,Luis,Gomez,luis.gomez@example.edu,Mechanical Engineering,2022,83,closed,2026-02-03,2026-02-01
-STU013,Mary,Nwosu,mary.nwosu@example.edu,Law,2023,52,open,2026-02-15,
-STU014,Nia,Patel,nia.patel@example.edu,Nursing,2024,91,completed,2026-02-10,2026-02-10
-STU016,Priya,Singh,priya.singh@example.edu,Computer Science,2024,76,open,2026-02-16,
-STU017,Qiang,Lee,qiang.lee@example.edu,Data Science,2023,85,open,2026-02-18,
-STU018,Ruth,Danjuma,ruth.danjuma@example.edu,Public Administration,2022,62,closed,2026-02-04,2026-02-05
-STU019,Samuel,Eze,samuel.eze@example.edu,Nursing,2020,54,open,2026-02-07,2026-02-09
-STU020,Tolu,Ibrahim,tolu.ibrahim@example.edu,Cybersecurity,2024,89,completed,2026-02-17,2026-02-15
-STU022,Vera,Chen,vera.chen@example.edu,Information Systems,2021,79,open,2026-02-12,
-STU025,Yara,Abbas,yara.abbas@example.edu,Architecture,2024,84,open,2026-02-19,
-STU026,Zain,Adeniji,zain.adeniji@example.edu,Physics,2023,77,open,2026-02-20,
+STU001,Alice,Nguyen,alice.nguyen@example.edu,Computer Science,2022,78,closed,2025-04-10,2025-04-08
+STU002,Bob,Mensah,bob.mensah@example.edu,Mathematics,2022,90,open,2025-04-09,
+STU003,Chidi,Okoro,chidi.okoro@example.edu,Physics,2021,56,open,2025-04-07,
+STU004,Diana,Smith,diana.smith@example.edu,Chemistry,2022,65,closed,2025-04-06,2025-04-10
+STU006,Fatima,Bello,fatima.bello@example.edu,Statistics,2023,81,open,2025-04-11,
+STU007,Grace,Adeyemi,grace.adeyemi@example.edu,Economics,2021,88,completed,2025-04-12,2025-04-11
+STU008,Hamza,Yusuf,hamza.yusuf@example.edu,Computer Engineering,2022,75,in_progress,2025-04-13,
+STU009,Ifeoma,Udo,ifeoma.udo@example.edu,Information Systems,2020,95,completed,2025-04-08,2025-04-08
+STU011,Kemi,Afolabi,kemi.afolabi@example.edu,Accounting,2023,67,open,2025-04-14,
+STU012,Luis,Gomez,luis.gomez@example.edu,Mechanical Engineering,2022,83,closed,2025-04-03,2025-04-01
+STU013,Mary,Nwosu,mary.nwosu@example.edu,Law,2023,52,open,2025-04-15,
+STU014,Nia,Patel,nia.patel@example.edu,Nursing,2024,91,completed,2025-04-10,2025-04-10
+STU016,Priya,Singh,priya.singh@example.edu,Computer Science,2024,76,open,2025-04-16,
+STU017,Qiang,Lee,qiang.lee@example.edu,Data Science,2023,85,open,2025-04-18,
+STU018,Ruth,Danjuma,ruth.danjuma@example.edu,Public Administration,2022,62,closed,2025-04-04,2025-04-05
+STU019,Samuel,Eze,samuel.eze@example.edu,Nursing,2020,54,open,2025-04-07,2025-04-09
+STU020,Tolu,Ibrahim,tolu.ibrahim@example.edu,Cybersecurity,2024,89,completed,2025-04-17,2025-04-15
+STU022,Vera,Chen,vera.chen@example.edu,Information Systems,2021,79,open,2025-04-12,
+STU025,Yara,Abbas,yara.abbas@example.edu,Architecture,2024,84,open,2025-04-19,
+STU026,Zain,Adeniji,zain.adeniji@example.edu,Physics,2023,77,open,2025-04-20,
+STU028,Ben,Olatunji,ben.olatunji@example.edu,Economics,2018,74,completed,2025-03-18,2025-03-17
+STU030,David,Ekpo,david.ekpo@example.edu,Statistics,2017,83,completed,2025-02-14,2025-02-14
+STU032,Faruq,Salami,faruq.salami@example.edu,Computer Science,2023,93,completed,2025-04-04,2025-04-02
+STU034,Hassan,Bukar,hassan.bukar@example.edu,Physics,2024,64,open,2025-04-24,
+STU035,Iris,Mensima,iris.mensima@example.edu,Civil Engineering,2021,86,in_progress,2025-04-25,
+STU037,Khadija,Lawal,khadija.lawal@example.edu,Nursing,2024,88,completed,2025-04-19,2025-04-18
+STU038,Lekan,Aina,lekan.aina@example.edu,Information Systems,2019,71,open,2025-04-26,
+STU040,Nuru,Idris,nuru.idris@example.edu,Cybersecurity,2022,97,completed,2025-04-28,2025-04-28
+STU041,Peter,Ajayi,peter.ajayi@example.edu,Electrical Engineering,2023,82,open,2025-04-29,
+STU042,Queen,Aremu,queen.aremu@example.edu,Mass Communication,2024,75,open,2025-04-30,
+STU043,Gideon,Ige,gideon.ige43@example.edu,Data Science,2021,79,closed,2025-04-27,2025-04-28
+STU044,Halima,James,halima.james44@example.edu,Public Administration,2022,84,open,2025-04-28,
+STU045,Ibrahim,Kamara,ibrahim.kamara45@example.edu,Architecture,2023,89,in_progress,2025-04-01,
+STU046,Janet,Lawson,janet.lawson46@example.edu,Computer Science,2024,94,completed,2025-04-02,2025-04-01
+STU047,Kunle,Mohammed,kunle.mohammed47@example.edu,Mathematics,2017,101,closed,2022-06-05,2022-06-04
+STU048,Lara,Nwankwo,lara.nwankwo48@example.edu,Physics,2018,46,open,2025-04-04,
+STU049,Musa,Ojo,musa.ojo49@example.edu,Chemistry,2019,51,in_progress,2025-04-05,
+STU050,Ngozi,Popoola,ngozi.popoola50@example.edu,Biology,2020,56,completed,2025-04-06,2025-04-05
+STU051,Opeyemi,Qasim,opeyemi.qasim51@example.edu,Statistics,2021,61,closed,2025-04-07,2025-04-06
+STU052,Peace,Raji,peace.raji52@example.edu,Economics,2022,66,open,2025-04-08,
+STU053,Quincy,Salihu,quincy.salihu53@example.edu,Information Systems,2023,71,in_progress,2025-04-09,
+STU054,Rasheed,Taiwo,rasheed.taiwo54@example.edu,Civil Engineering,2024,76,completed,2025-04-10,2025-04-09
+STU055,Sade,Adamu,sade.adamu55@example.edu,Accounting,2017,81,closed,2025-04-11,2025-04-12
+STU056,Tunde,Balogun,tunde.balogun56@example.edu,Law,2018,86,open,2025-04-12,
+STU057,Abel,Chukwu,abel.chukwu57@example.edu,Nursing,2019,91,in_progress,2024-11-15,
+STU058,Binta,Durojaiye,binta.durojaiye58@example.edu,Cybersecurity,2020,38,completed,2023-09-16,2023-09-15
+STU059,Caleb,Eze,caleb.eze59@example.edu,Data Science,2021,43,closed,2025-04-15,2025-04-14
+STU060,Deborah,Folorunsho,deborah.folorunsho60@example.edu,Public Administration,2022,48,open,2025-04-16,
+STU061,Ethan,Garuba,ethan.garuba61@example.edu,Architecture,2023,53,in_progress,2025-04-17,
+STU062,Fisayo,Hassan,fisayo.hassan62@example.edu,Computer Science,2024,58,completed,2025-04-18,2025-04-17
+STU063,Gideon,Ige,gideon.ige63@example.edu,Mathematics,2017,63,closed,2025-04-19,2025-04-18
+STU064,Halima,James,halima.james64@example.edu,Physics,2018,68,open,2025-04-20,
+STU065,Ibrahim,Kamara,ibrahim.kamara65@example.edu,Chemistry,2019,73,in_progress,2025-04-21,
+STU066,Janet,Lawson,janet.lawson66@example.edu,Biology,2020,78,completed,2025-04-22,2025-04-21
+STU067,Kunle,Mohammed,kunle.mohammed67@example.edu,Statistics,2021,83,closed,2025-04-23,2025-04-24
+STU068,Lara,Nwankwo,lara.nwankwo68@example.edu,Economics,2022,88,open,2025-04-24,
+STU069,Musa,Ojo,musa.ojo69@example.edu,Information Systems,2023,93,in_progress,2025-04-25,
+STU070,Ngozi,Popoola,ngozi.popoola70@example.edu,Civil Engineering,2024,40,completed,2025-04-26,2025-04-25
+STU071,Opeyemi,Qasim,opeyemi.qasim71@example.edu,Accounting,2017,45,closed,2025-04-27,2025-04-26
+STU072,Peace,Raji,peace.raji72@example.edu,Law,2018,50,open,2025-04-28,
+STU073,Quincy,Salihu,quincy.salihu73@example.edu,Nursing,2019,55,in_progress,2025-04-01,
+STU074,Rasheed,Taiwo,rasheed.taiwo74@example.edu,Cybersecurity,2020,60,completed,2024-11-05,2024-11-04
+STU075,Sade,Adamu,sade.adamu75@example.edu,Data Science,2021,65,closed,2025-04-03,2025-04-02
+STU076,Tunde,Balogun,tunde.balogun76@example.edu,Public Administration,2022,70,open,2022-06-07,
+STU077,Abel,Chukwu,abel.chukwu77@example.edu,Architecture,2023,75,in_progress,2025-04-05,
+STU078,Binta,Durojaiye,binta.durojaiye78@example.edu,Computer Science,2024,80,completed,2025-04-06,2025-04-05
+STU079,Caleb,Eze,caleb.eze79@example.edu,Mathematics,2017,85,closed,2025-04-07,2025-04-08
+STU080,Deborah,Folorunsho,deborah.folorunsho80@example.edu,Physics,2018,90,open,2025-04-08,
+STU081,Ethan,Garuba,ethan.garuba81@example.edu,Chemistry,2019,95,in_progress,2023-09-12,
+STU082,Fisayo,Hassan,fisayo.hassan82@example.edu,Biology,2020,42,completed,2025-04-10,2025-04-09
+STU083,Gideon,Ige,gideon.ige83@example.edu,Statistics,2021,47,closed,2025-04-11,2025-04-10
+STU084,Halima,James,halima.james84@example.edu,Economics,2022,52,open,2025-04-12,
+STU085,Ibrahim,Kamara,ibrahim.kamara85@example.edu,Information Systems,2023,57,in_progress,2025-04-13,
+STU086,Janet,Lawson,janet.lawson86@example.edu,Civil Engineering,2024,62,completed,2025-04-14,2025-04-13
+STU087,Kunle,Mohammed,kunle.mohammed87@example.edu,Accounting,2017,67,closed,2025-04-15,2025-04-14
+STU088,Lara,Nwankwo,lara.nwankwo88@example.edu,Law,2018,72,open,2025-04-16,
+STU089,Musa,Ojo,musa.ojo89@example.edu,Nursing,2019,77,in_progress,2025-04-17,
+STU090,Ngozi,Popoola,ngozi.popoola90@example.edu,Cybersecurity,2020,82,completed,2025-04-18,2025-04-17
+STU091,Opeyemi,Qasim,opeyemi.qasim91@example.edu,Data Science,2021,87,closed,2024-11-22,2024-11-23
+STU092,Peace,Raji,peace.raji92@example.edu,Public Administration,2022,92,open,2025-04-20,
+STU093,Quincy,Salihu,quincy.salihu93@example.edu,Architecture,2023,39,in_progress,2025-04-21,
+STU094,Rasheed,Taiwo,rasheed.taiwo94@example.edu,Computer Science,2024,101,completed,2025-04-22,2025-04-21
+STU095,Sade,Adamu,sade.adamu95@example.edu,Mathematics,2017,49,closed,2025-04-23,2025-04-22
+STU096,Tunde,Balogun,tunde.balogun96@example.edu,Physics,2018,54,open,2025-04-24,
+STU097,Abel,Chukwu,abel.chukwu97@example.edu,Chemistry,2019,59,in_progress,2025-04-25,
+STU098,Binta,Durojaiye,binta.durojaiye98@example.edu,Biology,2020,64,completed,2025-04-26,2025-04-25
+STU099,Caleb,Eze,caleb.eze99@example.edu,Statistics,2021,69,closed,2025-04-27,2025-04-26
+STU100,Deborah,Folorunsho,deborah.folorunsho100@example.edu,Economics,2022,74,open,2025-04-28,
+STU101,Ethan,Garuba,ethan.garuba101@example.edu,Information Systems,2023,79,in_progress,2025-04-01,
+STU102,Fisayo,Hassan,fisayo.hassan102@example.edu,Civil Engineering,2024,84,completed,2025-04-02,2025-04-01
+STU103,Gideon,Ige,gideon.ige103@example.edu,Accounting,2017,89,closed,2025-04-03,2025-04-04
+STU104,Halima,James,halima.james104@example.edu,Law,2018,94,open,2023-09-08,
+STU105,Ibrahim,Kamara,ibrahim.kamara105@example.edu,Nursing,2019,41,in_progress,2022-06-09,
+STU106,Janet,Lawson,janet.lawson106@example.edu,Cybersecurity,2020,46,completed,2025-04-06,2025-04-05
+STU107,Kunle,Mohammed,kunle.mohammed107@example.edu,Data Science,2021,51,closed,2025-04-07,2025-04-06
+STU108,Lara,Nwankwo,lara.nwankwo108@example.edu,Public Administration,2022,56,open,2024-11-12,
+STU109,Musa,Ojo,musa.ojo109@example.edu,Architecture,2023,61,in_progress,2025-04-09,
+STU110,Ngozi,Popoola,ngozi.popoola110@example.edu,Computer Science,2024,66,completed,2025-04-10,2025-04-09
+STU111,Opeyemi,Qasim,opeyemi.qasim111@example.edu,Mathematics,2017,71,closed,2025-04-11,2025-04-10
+STU112,Peace,Raji,peace.raji112@example.edu,Physics,2018,76,open,2025-04-12,2025-04-14
+STU113,Quincy,Salihu,quincy.salihu113@example.edu,Chemistry,2019,81,in_progress,2025-04-13,
+STU114,Rasheed,Taiwo,rasheed.taiwo114@example.edu,Biology,2020,86,completed,2025-04-14,2025-04-13
+STU115,Sade,Adamu,sade.adamu115@example.edu,Statistics,2021,91,closed,2025-04-15,2025-04-16
+STU116,Tunde,Balogun,tunde.balogun116@example.edu,Economics,2022,38,open,2025-04-16,
+STU117,Abel,Chukwu,abel.chukwu117@example.edu,Information Systems,2023,43,in_progress,2025-04-17,
+STU118,Binta,Durojaiye,binta.durojaiye118@example.edu,Civil Engineering,2024,48,completed,2025-04-18,2025-04-17
+STU119,Caleb,Eze,caleb.eze119@example.edu,Accounting,2017,53,closed,2025-04-19,2025-04-18
+STU120,Deborah,Folorunsho,deborah.folorunsho120@example.edu,Law,2018,58,open,2025-04-20,
+STU121,Ethan,Garuba,ethan.garuba121@example.edu,Nursing,2019,63,in_progress,2025-04-21,
+STU122,Fisayo,Hassan,fisayo.hassan122@example.edu,Cybersecurity,2020,68,completed,2025-04-22,2025-04-21
+STU123,Gideon,Ige,gideon.ige123@example.edu,Data Science,2021,73,closed,2025-04-23,2025-04-22
+STU124,Halima,James,halima.james124@example.edu,Public Administration,2022,78,open,2025-04-24,
+STU125,Ibrahim,Kamara,ibrahim.kamara125@example.edu,Architecture,2023,83,in_progress,2024-11-02,
+STU126,Janet,Lawson,janet.lawson126@example.edu,Computer Science,2024,88,completed,2025-04-26,2025-04-25
+STU127,Kunle,Mohammed,kunle.mohammed127@example.edu,Mathematics,2017,93,closed,2023-09-04,2023-09-05
+STU128,Lara,Nwankwo,lara.nwankwo128@example.edu,Physics,2018,40,open,2025-04-28,
+STU129,Musa,Ojo,musa.ojo129@example.edu,Chemistry,2019,45,in_progress,2025-04-01,
+STU130,Ngozi,Popoola,ngozi.popoola130@example.edu,Biology,2020,50,completed,2025-04-02,2025-04-01
+STU131,Opeyemi,Qasim,opeyemi.qasim131@example.edu,Statistics,2021,55,closed,2025-04-03,2025-04-02
+STU132,Peace,Raji,peace.raji132@example.edu,Economics,2022,60,open,2025-04-04,
+STU133,Quincy,Salihu,quincy.salihu133@example.edu,Information Systems,2023,65,in_progress,2025-04-05,
+STU134,Rasheed,Taiwo,rasheed.taiwo134@example.edu,Civil Engineering,2024,70,completed,2022-06-11,2022-06-10
+STU135,Sade,Adamu,sade.adamu135@example.edu,Accounting,2017,75,closed,2025-04-07,2025-04-06
+STU136,Tunde,Balogun,tunde.balogun136@example.edu,Law,2018,80,open,2025-04-08,
+STU137,Abel,Chukwu,abel.chukwu137@example.edu,Nursing,2019,85,in_progress,2025-04-09,
+STU138,Binta,Durojaiye,binta.durojaiye138@example.edu,Cybersecurity,2020,90,completed,2025-04-10,2025-04-09
+STU139,Caleb,Eze,caleb.eze139@example.edu,Data Science,2021,95,closed,2025-04-11,2025-04-12
+STU140,Deborah,Folorunsho,deborah.folorunsho140@example.edu,Public Administration,2022,42,open,2025-04-12,
+STU141,Ethan,Garuba,ethan.garuba141@example.edu,Architecture,2023,101,in_progress,2025-04-13,
+STU142,Fisayo,Hassan,fisayo.hassan142@example.edu,Computer Science,2024,52,completed,2024-11-19,2024-11-18
+STU143,Gideon,Ige,gideon.ige143@example.edu,Mathematics,2017,57,closed,2025-04-15,2025-04-14
+STU144,Halima,James,halima.james144@example.edu,Physics,2018,62,open,2025-04-16,
+STU145,Ibrahim,Kamara,ibrahim.kamara145@example.edu,Chemistry,2019,67,in_progress,2025-04-17,
+STU146,Janet,Lawson,janet.lawson146@example.edu,Biology,2020,72,completed,2025-04-18,2025-04-17
+STU147,Kunle,Mohammed,kunle.mohammed147@example.edu,Statistics,2021,77,closed,2025-04-19,2025-04-18
+STU148,Lara,Nwankwo,lara.nwankwo148@example.edu,Economics,2022,82,open,2025-04-20,
+STU149,Musa,Ojo,musa.ojo149@example.edu,Information Systems,2023,87,in_progress,2025-04-21,
+STU150,Ngozi,Popoola,ngozi.popoola150@example.edu,Civil Engineering,2024,92,completed,2023-09-27,2023-09-26
+STU151,Opeyemi,Qasim,opeyemi.qasim151@example.edu,Accounting,2017,39,closed,2025-04-23,2025-04-24
+STU152,Peace,Raji,peace.raji152@example.edu,Law,2018,44,open,2025-04-24,

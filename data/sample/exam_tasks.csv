@@ -1,19 +1,141 @@
 task_id,owner,checkpoint,status,due_date,completed_at,priority
-TSK001,Ops Team,Device Compliance,open,2026-02-08,,high
-TSK002,Invigilation,Hall Readiness,in_progress,2026-02-10,,medium
-TSK003,Network Team,CCTV Connectivity,completed,2026-02-07,2026-02-06,high
-TSK004,Support Team,Biometric Calibration,open,2026-02-09,,high
-TSK005,Facilities,Power Backup Check,completed,2026-02-05,2026-02-07,medium
-TSK006,Audit Desk,Evidence Packet Review,open,2026-02-11,,low
-TSK007,Admissions Office,Applicant Identity Recheck,in_progress,2026-02-12,,high
-TSK008,Results Unit,Grade Sheet Consolidation,open,2026-02-13,,high
-TSK009,Registry,Result Approval Pack Assembly,open,2026-02-14,,high
-TSK010,Database Team,Result Backup Verification,completed,2026-02-09,2026-02-09,medium
-TSK011,QA Desk,Anomaly Revalidation,open,2026-02-10,,medium
-TSK012,Security Team,Exam Hall Access Audit,completed,2026-02-08,2026-02-08,high
-TSK013,Compliance Unit,CCTV Evidence Hashing,open,2026-02-15,,medium
-TSK014,IT Support,Biometric Device Firmware Check,in_progress,2026-02-16,,high
-TSK015,Reporting Team,Leadership KPI Snapshot,open,2026-02-17,,medium
-TSK016,Helpdesk,Candidate Ticket Clearance,completed,2026-02-11,2026-02-12,low
-TSK017,Network Team,Switch Port Validation,open,2026-02-12,,medium
-TSK018,Ops Team,Exam Script Pickup Chain Log,open,2026-02-18,,low
+TSK001,Ops Team,Device Compliance,open,2025-04-08,,high
+TSK002,Invigilation,Hall Readiness,in_progress,2025-04-10,,medium
+TSK003,Network Team,CCTV Connectivity,completed,2025-04-07,2025-04-06,high
+TSK004,Support Team,Biometric Calibration,open,2025-04-09,,high
+TSK005,Facilities,Power Backup Check,completed,2025-04-05,2025-04-07,medium
+TSK006,Audit Desk,Evidence Packet Review,open,2025-04-11,,low
+TSK007,Admissions Office,Applicant Identity Recheck,in_progress,2025-04-12,,high
+TSK008,Results Unit,Grade Sheet Consolidation,open,2025-04-13,,high
+TSK009,Registry,Result Approval Pack Assembly,open,2025-04-14,,high
+TSK010,Database Team,Result Backup Verification,completed,2025-04-09,2025-04-09,medium
+TSK011,QA Desk,Anomaly Revalidation,open,2025-04-10,,medium
+TSK012,Security Team,Exam Hall Access Audit,completed,2025-04-08,2025-04-08,high
+TSK013,Compliance Unit,CCTV Evidence Hashing,open,2025-04-15,,medium
+TSK014,IT Support,Biometric Device Firmware Check,in_progress,2025-04-16,,high
+TSK015,Reporting Team,Leadership KPI Snapshot,open,2025-04-17,,medium
+TSK016,Helpdesk,Candidate Ticket Clearance,completed,2025-04-11,2025-04-12,low
+TSK017,Network Team,Switch Port Validation,open,2025-04-12,,medium
+TSK018,Ops Team,Exam Script Pickup Chain Log,open,2025-04-18,,low
+TSK019,Admissions Office,Offer Letter Dispatch,completed,2025-03-24,2025-03-23,medium
+TSK020,Registry,Matric List Final Check,open,2025-04-19,,high
+TSK021,Database Team,Transcript Export Validation,in_progress,2025-04-20,,medium
+TSK022,Compliance Unit,Invigilator Attendance Sign-off,open,2025-04-21,,medium
+TSK023,Facilities,Generator Fuel Confirmation,completed,2025-04-06,2025-04-06,low
+TSK024,QA Desk,Exception Case Board Review,open,2025-04-22,,high
+TSK025,Network Team,LAN Redundancy Drill,completed,2025-02-18,2025-02-18,medium
+TSK026,Security Team,Visitor Access Log Reconciliation,open,2025-04-23,,medium
+TSK027,Support Team,Candidate Device Whitelist Audit,in_progress,2025-04-24,,high
+TSK028,Reporting Team,Senate Summary Pack,open,2025-04-25,,high
+TSK029,Audit Desk,Archive Evidence Bundle,open,2025-04-26,,low
+TSK030,Ops Team,Contingency Venue Drill,completed,2024-11-07,2024-11-06,medium
+TSK031,Reporting Team,Practical Lab Seat Allocation,in_progress,2025-04-23,,medium
+TSK032,Helpdesk,Result Review Escalation,completed,2024-11-25,2024-11-24,low
+TSK033,Ops Team,Attendance Register Audit,open,2025-04-25,,high
+TSK034,Invigilation,Question Paper Dispatch,in_progress,2025-04-26,,medium
+TSK035,Network Team,Incident Log Reconciliation,completed,2025-04-27,2025-04-28,low
+TSK036,Support Team,Device Compliance,open,2025-04-28,,high
+TSK037,Facilities,Hall Readiness,in_progress,2025-04-01,,medium
+TSK038,Audit Desk,CCTV Connectivity,completed,2025-04-02,2025-04-01,low
+TSK039,Admissions Office,Biometric Calibration,open,2022-06-05,,high
+TSK040,Results Unit,Power Backup Check,in_progress,2025-04-04,,medium
+TSK041,Registry,Evidence Packet Review,completed,2025-04-05,2025-04-06,low
+TSK042,Database Team,Applicant Identity Recheck,open,2025-04-06,,high
+TSK043,QA Desk,Grade Sheet Consolidation,in_progress,2025-04-07,,medium
+TSK044,Security Team,Result Approval Pack Assembly,completed,2025-04-08,2025-04-07,low
+TSK045,Compliance Unit,Result Backup Verification,open,2025-04-09,,high
+TSK046,IT Support,Anomaly Revalidation,in_progress,2025-04-10,,medium
+TSK047,Reporting Team,Exam Hall Access Audit,completed,2025-04-11,2025-04-12,low
+TSK048,Helpdesk,CCTV Evidence Hashing,open,2025-04-12,,high
+TSK049,Ops Team,Biometric Device Firmware Check,in_progress,2024-11-15,,medium
+TSK050,Invigilation,Leadership KPI Snapshot,completed,2023-09-16,2023-09-15,low
+TSK051,Network Team,Candidate Ticket Clearance,open,2025-04-15,,high
+TSK052,Support Team,Switch Port Validation,in_progress,2025-04-16,,medium
+TSK053,Facilities,Exam Script Pickup Chain Log,completed,2025-04-17,2025-04-18,low
+TSK054,Audit Desk,Offer Letter Dispatch,open,2025-04-18,,high
+TSK055,Admissions Office,Matric List Final Check,in_progress,2025-04-19,,medium
+TSK056,Results Unit,Transcript Export Validation,completed,2025-04-20,2025-04-19,low
+TSK057,Registry,Invigilator Attendance Sign-off,open,2025-04-21,,high
+TSK058,Database Team,Generator Fuel Confirmation,in_progress,2025-04-22,,medium
+TSK059,QA Desk,Exception Case Board Review,completed,2025-04-23,2025-04-24,low
+TSK060,Security Team,LAN Redundancy Drill,open,2025-04-24,,high
+TSK061,Compliance Unit,Visitor Access Log Reconciliation,in_progress,2025-04-25,,medium
+TSK062,IT Support,Candidate Device Whitelist Audit,completed,2025-04-26,2025-04-25,low
+TSK063,Reporting Team,Senate Summary Pack,open,2025-04-27,,high
+TSK064,Helpdesk,Archive Evidence Bundle,in_progress,2025-04-28,,medium
+TSK065,Ops Team,Contingency Venue Drill,completed,2025-04-01,2025-04-02,low
+TSK066,Invigilation,Practical Lab Seat Allocation,open,2024-11-05,,high
+TSK067,Network Team,Result Review Escalation,in_progress,2025-04-03,,medium
+TSK068,Support Team,Attendance Register Audit,completed,2022-06-07,2022-06-06,low
+TSK069,Facilities,Question Paper Dispatch,open,2025-04-05,,high
+TSK070,Audit Desk,Incident Log Reconciliation,in_progress,2025-04-06,,medium
+TSK071,Admissions Office,Device Compliance,completed,2025-04-07,2025-04-08,low
+TSK072,Results Unit,Hall Readiness,open,2025-04-08,,high
+TSK073,Registry,CCTV Connectivity,in_progress,2023-09-12,,medium
+TSK074,Database Team,Biometric Calibration,completed,2025-04-10,2025-04-09,low
+TSK075,QA Desk,Power Backup Check,open,2025-04-11,,high
+TSK076,Security Team,Evidence Packet Review,in_progress,2025-04-12,,medium
+TSK077,Compliance Unit,Applicant Identity Recheck,completed,2025-04-13,2025-04-14,low
+TSK078,IT Support,Grade Sheet Consolidation,open,2025-04-14,,high
+TSK079,Reporting Team,Result Approval Pack Assembly,in_progress,2025-04-15,,medium
+TSK080,Helpdesk,Result Backup Verification,completed,2025-04-16,2025-04-15,low
+TSK081,Ops Team,Anomaly Revalidation,open,2025-04-17,,high
+TSK082,Invigilation,Exam Hall Access Audit,in_progress,2025-04-18,,medium
+TSK083,Network Team,CCTV Evidence Hashing,completed,2024-11-22,2024-11-23,low
+TSK084,Support Team,Biometric Device Firmware Check,open,2025-04-20,,high
+TSK085,Facilities,Leadership KPI Snapshot,in_progress,2025-04-21,,medium
+TSK086,Audit Desk,Candidate Ticket Clearance,completed,2025-04-22,2025-04-21,low
+TSK087,Admissions Office,Switch Port Validation,open,2025-04-23,,high
+TSK088,Results Unit,Exam Script Pickup Chain Log,in_progress,2025-04-24,,medium
+TSK089,Registry,Offer Letter Dispatch,completed,2025-04-25,2025-04-26,low
+TSK090,Database Team,Matric List Final Check,open,2025-04-26,,high
+TSK091,QA Desk,Transcript Export Validation,in_progress,2025-04-27,,medium
+TSK092,Security Team,Invigilator Attendance Sign-off,completed,2025-04-28,2025-04-27,low
+TSK093,Compliance Unit,Generator Fuel Confirmation,open,2025-04-01,,high
+TSK094,IT Support,Exception Case Board Review,in_progress,2025-04-02,,medium
+TSK095,Reporting Team,LAN Redundancy Drill,completed,2025-04-03,2025-04-04,low
+TSK096,Helpdesk,Visitor Access Log Reconciliation,open,2023-09-08,,high
+TSK097,Ops Team,Candidate Device Whitelist Audit,in_progress,2022-06-09,,medium
+TSK098,Invigilation,Senate Summary Pack,completed,2025-04-06,2025-04-05,low
+TSK099,Network Team,Archive Evidence Bundle,open,2025-04-07,,high
+TSK100,Support Team,Contingency Venue Drill,in_progress,2024-11-12,,medium
+TSK101,Facilities,Practical Lab Seat Allocation,completed,2025-04-09,2025-04-10,low
+TSK102,Audit Desk,Result Review Escalation,open,2025-04-10,,high
+TSK103,Admissions Office,Attendance Register Audit,in_progress,2025-04-11,,medium
+TSK104,Results Unit,Question Paper Dispatch,completed,2025-04-12,2025-04-11,low
+TSK105,Registry,Incident Log Reconciliation,open,2025-04-13,,high
+TSK106,Database Team,Device Compliance,in_progress,2025-04-14,,medium
+TSK107,QA Desk,Hall Readiness,completed,2025-04-15,2025-04-16,low
+TSK108,Security Team,CCTV Connectivity,open,2025-04-16,,high
+TSK109,Compliance Unit,Biometric Calibration,in_progress,2025-04-17,,medium
+TSK110,IT Support,Power Backup Check,completed,2025-04-18,2025-04-17,low
+TSK111,Reporting Team,Evidence Packet Review,open,2025-04-19,,high
+TSK112,Helpdesk,Applicant Identity Recheck,in_progress,2025-04-20,,medium
+TSK113,Ops Team,Grade Sheet Consolidation,completed,2025-04-21,2025-04-22,low
+TSK114,Invigilation,Result Approval Pack Assembly,open,2025-04-22,,high
+TSK115,Network Team,Result Backup Verification,in_progress,2025-04-23,,medium
+TSK116,Support Team,Anomaly Revalidation,completed,2025-04-24,2025-04-23,low
+TSK117,Facilities,Exam Hall Access Audit,open,2024-11-02,,high
+TSK118,Audit Desk,CCTV Evidence Hashing,in_progress,2025-04-26,,medium
+TSK119,Admissions Office,Biometric Device Firmware Check,completed,2023-09-04,2023-09-05,low
+TSK120,Results Unit,Leadership KPI Snapshot,open,2025-04-28,,high
+TSK121,Registry,Candidate Ticket Clearance,in_progress,2025-04-01,,medium
+TSK122,Database Team,Switch Port Validation,completed,2025-04-02,2025-04-01,low
+TSK123,QA Desk,Exam Script Pickup Chain Log,open,2025-04-03,,high
+TSK124,Security Team,Offer Letter Dispatch,in_progress,2025-04-04,,medium
+TSK125,Compliance Unit,Matric List Final Check,completed,2025-04-05,2025-04-06,low
+TSK126,IT Support,Transcript Export Validation,open,2022-06-11,,high
+TSK127,Reporting Team,Invigilator Attendance Sign-off,in_progress,2025-04-07,,medium
+TSK128,Helpdesk,Generator Fuel Confirmation,completed,2025-04-08,2025-04-07,low
+TSK129,Ops Team,Exception Case Board Review,open,2025-04-09,,high
+TSK130,Invigilation,LAN Redundancy Drill,in_progress,2025-04-10,,medium
+TSK131,Network Team,Visitor Access Log Reconciliation,completed,2025-04-11,2025-04-12,low
+TSK132,Support Team,Candidate Device Whitelist Audit,open,2025-04-12,,high
+TSK133,Facilities,Senate Summary Pack,in_progress,2025-04-13,,medium
+TSK134,Audit Desk,Archive Evidence Bundle,completed,2024-11-19,2024-11-18,low
+TSK135,Admissions Office,Contingency Venue Drill,open,2025-04-15,,high
+TSK136,Results Unit,Practical Lab Seat Allocation,in_progress,2025-04-16,,medium
+TSK137,Registry,Result Review Escalation,completed,2025-04-17,2025-04-18,low
+TSK138,Database Team,Attendance Register Audit,open,2025-04-18,,high
+TSK139,QA Desk,Question Paper Dispatch,in_progress,2025-04-19,,medium
+TSK140,Security Team,Incident Log Reconciliation,completed,2025-04-20,2025-04-19,low

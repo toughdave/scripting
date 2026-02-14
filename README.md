@@ -90,16 +90,16 @@ google-sheets/
 
 ## Expanded sample data included
 
-The sample datasets are intentionally richer to mirror realistic operational review scenarios:
+The sample datasets are intentionally richer to mirror realistic operational review scenarios.
 
 - `data/sample/student_records_source.csv`
-  - 25 student records across admissions cohorts and multiple departments
+  - 140 student records across admissions cohorts and multiple departments
   - includes intentional quality issues: duplicate IDs, missing email/department, out-of-range scores, and status exceptions
 - `data/sample/student_records_target.csv`
-  - 20 records with overlapping and non-overlapping IDs for reconciliation behavior
+  - 140 records with overlapping and non-overlapping IDs for reconciliation behavior
   - includes realistic score/status/department differences for mismatch reporting
 - `data/sample/exam_tasks.csv`
-  - 18 operational checkpoints tied to admissions, exam integrity, reporting, and compliance
+  - 140 operational checkpoints tied to admissions, exam integrity, reporting, and compliance
   - includes overdue, at-risk, completed-on-time, and late-completed patterns for SLA testing
 
 Equivalent SQL seed data is available in:
