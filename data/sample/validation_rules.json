@@ -1,0 +1,56 @@
+{
+  "key_column": "student_id",
+  "required_columns": [
+    "student_id",
+    "department",
+    "status"
+  ],
+  "rules": [
+    {
+      "name": "student_id_format",
+      "type": "regex",
+      "column": "student_id",
+      "pattern": "^STU[0-9]{3,}$"
+    },
+    {
+      "name": "department_required",
+      "type": "required",
+      "column": "department"
+    },
+    {
+      "name": "score_range",
+      "type": "range",
+      "column": "score",
+      "min": 0,
+      "max": 100
+    },
+    {
+      "name": "status_allowed",
+      "type": "allowed_values",
+      "column": "status",
+      "values": [
+        "open",
+        "closed",
+        "pending"
+      ]
+    },
+    {
+      "name": "completed_requires_closed_status",
+      "type": "allowed_values",
+      "column": "status",
+      "values": [
+        "closed"
+      ],
+      "when": {
+        "column": "completed_at",
+        "not_equals": ""
+      }
+    },
+    {
+      "name": "email_shape",
+      "type": "regex",
+      "column": "email",
+      "pattern": "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$"
+    }
+  ]
+}

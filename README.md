@@ -101,6 +101,9 @@ The sample datasets are intentionally richer to mirror realistic operational rev
 - `data/sample/exam_tasks.csv`
   - 140 operational checkpoints tied to admissions, exam integrity, reporting, and compliance
   - includes overdue, at-risk, completed-on-time, and late-completed patterns for SLA testing
+- `data/sample/validation_rules.json`
+  - JSON rule pack for config-driven CSV validation
+  - includes required-field, score-range, status, and conditional validation examples
 
 Equivalent SQL seed data is available in:
 `data/seed/sql_seed_demo_academic_dataset/{mysql.sql,postgres.sql,sqlite.sql}`
@@ -117,7 +120,7 @@ python -m pip install pandas openpyxl psutil python-dotenv
 ## Quick start
 
 1. Seed a demo database using files in `data/seed/sql_seed_demo_academic_dataset/`
-2. Run data profiling and normalization scripts in `scripts/python/data_quality/`
+2. Run data profiling, normalization, and rules-based validation scripts in `scripts/python/data_quality/`
 3. Run reconciliation and SLA scripts in `scripts/python/reconciliation/` and `scripts/python/reporting/`
 4. Use workflow wrappers in `scripts/workflow/` for scheduled execution
 
@@ -135,6 +138,13 @@ python scripts/python/data_quality/csv_clean_normalize.py \
   --output output/student_records_clean.csv \
   --date-columns due_date completed_at \
   --drop-duplicates
+
+# Run config-driven validation rules
+python scripts/python/data_quality/config_rules_validator.py \
+  --input data/sample/student_records_source.csv \
+  --rules data/sample/validation_rules.json \
+  --output reports/rules_violations.csv \
+  --summary reports/rules_validation_summary.json
 
 # Reconcile source vs target
 python scripts/python/reconciliation/reconcile_students.py \
