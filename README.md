@@ -35,6 +35,7 @@ These scripts reflect day-to-day operational needs from environments with high-v
 - building reusable data-quality routines for CSV/Excel pipelines
 - validating key records and catching duplicates, nulls, and status anomalies early
 - documenting reconciliation outcomes for transparent decision-making and approvals
+- handling incomplete or inconsistent identifiers with fuzzy reconciliation suggestions
 - supporting analytics preparation for Power BI/Excel reporting layers
 - creating cross-platform workflows that can run as scheduled jobs
 
@@ -152,6 +153,14 @@ python scripts/python/reconciliation/reconcile_students.py \
   --target data/sample/student_records_target.csv \
   --output reports/reconciliation.csv \
   --summary reports/reconciliation_summary.json
+
+# Fuzzy reconciliation when IDs are missing or inconsistent
+python scripts/python/reconciliation/fuzzy_match_students.py \
+  --source data/sample/student_records_source.csv \
+  --target data/sample/student_records_target.csv \
+  --output reports/reconciliation_fuzzy.csv \
+  --summary reports/reconciliation_fuzzy_summary.json \
+  --threshold 0.86
 
 # SLA at-risk report
 python scripts/python/reporting/sla_at_risk_report.py \
