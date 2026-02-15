@@ -13,7 +13,7 @@ The goal is simple: turn recurring operations into reliable, auditable, and repe
 
 ## Professional profile
 
-- Information Systems Analyst and Computer Science professional (MSc)
+- Information Systems Analyst and Computer Science professional (M.Tech. in Computer Science)
 - Experience supporting large academic IT operations handling **4,000+ student records/users**
 - Delivered data processing automation with Python, MySQL, Excel, and Google Sheets
 - Built workflows for reconciliation, result integrity checks, and audit-ready reporting
