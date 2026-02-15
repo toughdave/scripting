@@ -36,6 +36,7 @@ These scripts reflect day-to-day operational needs from environments with high-v
 - validating key records and catching duplicates, nulls, and status anomalies early
 - documenting reconciliation outcomes for transparent decision-making and approvals
 - handling incomplete or inconsistent identifiers with fuzzy reconciliation suggestions
+- resolving source-vs-target field conflicts with explicit survivorship priority rules
 - supporting analytics preparation for Power BI/Excel reporting layers
 - creating cross-platform workflows that can run as scheduled jobs
 
@@ -161,6 +162,14 @@ python scripts/python/reconciliation/fuzzy_match_students.py \
   --output reports/reconciliation_fuzzy.csv \
   --summary reports/reconciliation_fuzzy_summary.json \
   --threshold 0.86
+
+# Survivorship merge for source-vs-target conflicts
+python scripts/python/reconciliation/survivorship_merge_students.py \
+  --source data/sample/student_records_source.csv \
+  --target data/sample/student_records_target.csv \
+  --output reports/reconciliation_survivorship.csv \
+  --summary reports/reconciliation_survivorship_summary.json \
+  --priority target source
 
 # SLA at-risk report
 python scripts/python/reporting/sla_at_risk_report.py \
