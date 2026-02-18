@@ -16,6 +16,7 @@ New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
 
 $Stamp = Get-Date -Format "yyyyMMdd-HHmmss"
 $LogFile = Join-Path $LogDir "daily-run-$Stamp.log"
+$ManifestFile = Join-Path $ReportDir "run_manifest-$Stamp.json"
 
 function Run-Step {
   param(
@@ -78,4 +79,14 @@ Run-Step "db_smoke_test" @(
   "--output", (Join-Path $ReportDir "db_smoke.json")
 )
 
-"[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] Daily run complete. Log: $LogFile" | Tee-Object -FilePath $LogFile -Append
+Run-Step "run_manifest" @(
+  (Join-Path $RepoRoot "scripts/python/reporting/run_manifest.py"),
+  "--run-id", $Stamp,
+  "--status", "success",
+  "--report-dir", $ReportDir,
+  "--output-dir", $OutputDir,
+  "--log-file", $LogFile,
+  "--manifest", $ManifestFile
+)
+
+"[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] Daily run complete. Log: $LogFile Manifest: $ManifestFile" | Tee-Object -FilePath $LogFile -Append

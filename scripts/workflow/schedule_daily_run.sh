@@ -13,6 +13,7 @@ mkdir -p "${LOG_DIR}" "${REPORT_DIR}" "${OUTPUT_DIR}"
 
 STAMP="$(date +%Y%m%d-%H%M%S)"
 LOG_FILE="${LOG_DIR}/daily-run-${STAMP}.log"
+MANIFEST_FILE="${REPORT_DIR}/run_manifest-${STAMP}.json"
 
 run_step() {
   local label="$1"
@@ -61,4 +62,13 @@ run_step "db_smoke_test" \
   "${PYTHON_BIN}" "${REPO_ROOT}/scripts/python/systems/db_smoke_test.py" \
   --output "${REPORT_DIR}/db_smoke.json"
 
-echo "[$(date +%F' '%T)] Daily run complete. Log: ${LOG_FILE}" | tee -a "${LOG_FILE}"
+run_step "run_manifest" \
+  "${PYTHON_BIN}" "${REPO_ROOT}/scripts/python/reporting/run_manifest.py" \
+  --run-id "${STAMP}" \
+  --status "success" \
+  --report-dir "${REPORT_DIR}" \
+  --output-dir "${OUTPUT_DIR}" \
+  --log-file "${LOG_FILE}" \
+  --manifest "${MANIFEST_FILE}"
+
+echo "[$(date +%F' '%T)] Daily run complete. Log: ${LOG_FILE} Manifest: ${MANIFEST_FILE}" | tee -a "${LOG_FILE}"

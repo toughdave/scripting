@@ -182,7 +182,62 @@ python scripts/python/reporting/sla_at_risk_report.py \
 python scripts/python/etl/etl_runner.py \
   --config data/sample/etl_config.json \
   --apply
+
+# Build audit packet (CSV outputs + optional Excel workbook when openpyxl is available)
+python scripts/python/reporting/excel_export_audit_packet.py \
+  --input data/sample/student_records_source.csv \
+  --output-dir reports/audit_packet
+
+# System health snapshot
+python scripts/python/systems/system_health_snapshot.py \
+  --output reports/system_snapshot.json
+
+# Database smoke tests (SQLite demo mode)
+python scripts/python/systems/db_smoke_test.py \
+  --output reports/db_smoke.json
+
+# Excel workbook validation (replace with your workbook path)
+python scripts/python/data_quality/excel_validate_workbook.py \
+  --input path/to/workbook.xlsx \
+  --output reports/excel_validation_summary.json
+
+# Daily workflow wrappers
+bash scripts/workflow/schedule_daily_run.sh
+# powershell -ExecutionPolicy Bypass -File scripts/workflow/schedule_daily_run.ps1
+
+# Build run manifest directly (useful after ad-hoc script execution)
+python scripts/python/reporting/run_manifest.py \
+  --run-id 20260218-153323 \
+  --status success \
+  --report-dir reports \
+  --output-dir output \
+  --log-file logs/daily-run-20260218-153323.log \
+  --manifest reports/run_manifest-20260218-153323.json
 ```
+
+## Milestone B close-out run matrix (first-wave coverage)
+
+This matrix keeps each script family tied to clear run commands, expected outputs, and quick verification points.
+
+| Family | Primary assets | Typical input | Expected artifact(s) |
+|---|---|---|---|
+| SQL integrity checks | `scripts/sql/mysql/mysql_validate_results_integrity.sql`, `scripts/sql/postgres/postgres_validate_results_integrity.sql`, `scripts/sql/templates/sql_reconciliation_diff_template.sql` | Seeded `student_records` tables | Query result sets for missing/duplicate/invalid records and source-vs-target diffs |
+| SQL seed demos | `data/seed/sql_seed_demo_academic_dataset/{mysql.sql,postgres.sql,sqlite.sql}` | Local MySQL/Postgres/SQLite demo DB | Reproducible seeded dataset for script demos |
+| Data quality (CSV/Excel) | `csv_profile.py`, `csv_clean_normalize.py`, `config_rules_validator.py`, `excel_validate_workbook.py` | `data/sample/student_records_source.csv` (+ local `.xlsx` for workbook checks) | `reports/student_profile.json`, `output/student_records_clean.csv`, `reports/rules_violations.csv`, `reports/rules_validation_summary.json`, `reports/excel_validation_summary.json` |
+| Reconciliation | `reconcile_students.py`, `fuzzy_match_students.py`, `survivorship_merge_students.py` | `data/sample/student_records_source.csv` + `data/sample/student_records_target.csv` | `reports/reconciliation*.csv` + matching `*_summary.json` files |
+| Reporting + SLA | `sla_at_risk_report.py`, `excel_export_audit_packet.py` | `data/sample/exam_tasks.csv` and student records CSV | `reports/sla_at_risk.csv`, `reports/sla_summary.json`, `reports/audit_packet/*` |
+| ETL | `etl_runner.py` with `data/sample/etl_config.json` | Config + source CSV path | `output` CSV and ETL summary JSON configured in ETL config |
+| Systems | `system_health_snapshot.py`, `db_smoke_test.py` | Host metrics + optional DB env vars | `reports/system_snapshot.json`, `reports/db_smoke.json` |
+| Workflow wrappers | `scripts/workflow/schedule_daily_run.sh`, `scripts/workflow/schedule_daily_run.ps1` | Built-in sample dataset paths | Timestamped `logs/daily-run-*.log`, `reports/run_manifest-*.json`, and consolidated outputs under `reports/` and `output/` |
+| Google Sheets | `google-sheets/apps-script/apps_script_validation_rules.gs` | Google Sheet tab (`SHEET_NAME`) | In-sheet validation rules + exported sanitized CSV to Drive folder |
+| Power Query | `powerbi/powerquery/powerquery_data_quality_template.pq` | Power Query source connector/table | DQ columns (`dq_issue`, `dq_status`) for downstream BI filters |
+
+### Quick verification checklist
+
+1. Run the Python commands above and confirm fresh timestamps in `reports/` and `output/`.
+2. Execute `bash scripts/workflow/schedule_daily_run.sh` and confirm a new `logs/daily-run-*.log` file.
+3. Run at least one SQL integrity script against seeded demo data to confirm expected mismatch/duplicate outputs.
+4. For Sheets/Power Query assets, confirm template import executes and outputs validation status columns/exports as expected.
 
 ## Portfolio alignment
 
