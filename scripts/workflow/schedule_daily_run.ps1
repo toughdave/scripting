@@ -17,6 +17,10 @@ New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
 $Stamp = Get-Date -Format "yyyyMMdd-HHmmss"
 $LogFile = Join-Path $LogDir "daily-run-$Stamp.log"
 $ManifestFile = Join-Path $ReportDir "run_manifest-$Stamp.json"
+$StepStatusFile = Join-Path $ReportDir "step_status-$Stamp.csv"
+$script:RunFailed = $false
+
+"step,exit_code,start_utc,end_utc,duration_seconds,status" | Set-Content -Path $StepStatusFile
 
 function Run-Step {
   param(
@@ -24,13 +28,28 @@ function Run-Step {
     [string[]]$ArgsList
   )
 
+  $startTime = Get-Date
+  $startUtc = $startTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
   $start = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] START $Label"
   $start | Tee-Object -FilePath $LogFile -Append
 
   & $PythonBin @ArgsList 2>&1 | Tee-Object -FilePath $LogFile -Append
+  $exitCode = if ($null -ne $LASTEXITCODE) { [int]$LASTEXITCODE } else { 0 }
 
-  $done = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] DONE  $Label"
-  $done | Tee-Object -FilePath $LogFile -Append
+  $endTime = Get-Date
+  $endUtc = $endTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+  $durationSeconds = [int][Math]::Round(($endTime - $startTime).TotalSeconds)
+
+  if ($exitCode -eq 0) {
+    $done = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] DONE  $Label"
+    $done | Tee-Object -FilePath $LogFile -Append
+    "$Label,$exitCode,$startUtc,$endUtc,$durationSeconds,success" | Add-Content -Path $StepStatusFile
+  } else {
+    $fail = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] FAIL  $Label (exit=$exitCode)"
+    $fail | Tee-Object -FilePath $LogFile -Append
+    "$Label,$exitCode,$startUtc,$endUtc,$durationSeconds,failed" | Add-Content -Path $StepStatusFile
+    $script:RunFailed = $true
+  }
 }
 
 Run-Step "csv_profile" @(
@@ -82,11 +101,16 @@ Run-Step "db_smoke_test" @(
 Run-Step "run_manifest" @(
   (Join-Path $RepoRoot "scripts/python/reporting/run_manifest.py"),
   "--run-id", $Stamp,
-  "--status", "success",
+  "--status", $(if ($script:RunFailed) { "failed" } else { "success" }),
   "--report-dir", $ReportDir,
   "--output-dir", $OutputDir,
   "--log-file", $LogFile,
+  "--steps-file", $StepStatusFile,
   "--manifest", $ManifestFile
 )
 
-"[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] Daily run complete. Log: $LogFile Manifest: $ManifestFile" | Tee-Object -FilePath $LogFile -Append
+"[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] Daily run complete. Status: $(if ($script:RunFailed) { 'failed' } else { 'success' }) Log: $LogFile Manifest: $ManifestFile Steps: $StepStatusFile" | Tee-Object -FilePath $LogFile -Append
+
+if ($script:RunFailed) {
+  exit 1
+}

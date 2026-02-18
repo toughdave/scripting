@@ -14,13 +14,39 @@ mkdir -p "${LOG_DIR}" "${REPORT_DIR}" "${OUTPUT_DIR}"
 STAMP="$(date +%Y%m%d-%H%M%S)"
 LOG_FILE="${LOG_DIR}/daily-run-${STAMP}.log"
 MANIFEST_FILE="${REPORT_DIR}/run_manifest-${STAMP}.json"
+STEP_STATUS_FILE="${REPORT_DIR}/step_status-${STAMP}.csv"
+RUN_STATUS="success"
+
+printf "step,exit_code,start_utc,end_utc,duration_seconds,status\n" > "${STEP_STATUS_FILE}"
 
 run_step() {
   local label="$1"
   shift
+  local start_epoch end_epoch duration exit_code
+  local start_utc end_utc
+
+  start_epoch="$(date +%s)"
+  start_utc="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
   echo "[$(date +%F' '%T)] START ${label}" | tee -a "${LOG_FILE}"
+
+  set +e
   "$@" 2>&1 | tee -a "${LOG_FILE}"
-  echo "[$(date +%F' '%T)] DONE  ${label}" | tee -a "${LOG_FILE}"
+  exit_code=${PIPESTATUS[0]}
+  set -e
+
+  end_epoch="$(date +%s)"
+  end_utc="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  duration=$((end_epoch - start_epoch))
+
+  if [[ ${exit_code} -eq 0 ]]; then
+    echo "[$(date +%F' '%T)] DONE  ${label}" | tee -a "${LOG_FILE}"
+    printf "%s,%s,%s,%s,%s,%s\n" "${label}" "${exit_code}" "${start_utc}" "${end_utc}" "${duration}" "success" >> "${STEP_STATUS_FILE}"
+  else
+    echo "[$(date +%F' '%T)] FAIL  ${label} (exit=${exit_code})" | tee -a "${LOG_FILE}"
+    printf "%s,%s,%s,%s,%s,%s\n" "${label}" "${exit_code}" "${start_utc}" "${end_utc}" "${duration}" "failed" >> "${STEP_STATUS_FILE}"
+    RUN_STATUS="failed"
+  fi
 }
 
 run_step "csv_profile" \
@@ -65,10 +91,15 @@ run_step "db_smoke_test" \
 run_step "run_manifest" \
   "${PYTHON_BIN}" "${REPO_ROOT}/scripts/python/reporting/run_manifest.py" \
   --run-id "${STAMP}" \
-  --status "success" \
+  --status "${RUN_STATUS}" \
   --report-dir "${REPORT_DIR}" \
   --output-dir "${OUTPUT_DIR}" \
   --log-file "${LOG_FILE}" \
+  --steps-file "${STEP_STATUS_FILE}" \
   --manifest "${MANIFEST_FILE}"
 
-echo "[$(date +%F' '%T)] Daily run complete. Log: ${LOG_FILE} Manifest: ${MANIFEST_FILE}" | tee -a "${LOG_FILE}"
+echo "[$(date +%F' '%T)] Daily run complete. Status: ${RUN_STATUS} Log: ${LOG_FILE} Manifest: ${MANIFEST_FILE} Steps: ${STEP_STATUS_FILE}" | tee -a "${LOG_FILE}"
+
+if [[ "${RUN_STATUS}" != "success" ]]; then
+  exit 1
+fi

@@ -228,14 +228,14 @@ This matrix keeps each script family tied to clear run commands, expected output
 | Reporting + SLA | `sla_at_risk_report.py`, `excel_export_audit_packet.py` | `data/sample/exam_tasks.csv` and student records CSV | `reports/sla_at_risk.csv`, `reports/sla_summary.json`, `reports/audit_packet/*` |
 | ETL | `etl_runner.py` with `data/sample/etl_config.json` | Config + source CSV path | `output` CSV and ETL summary JSON configured in ETL config |
 | Systems | `system_health_snapshot.py`, `db_smoke_test.py` | Host metrics + optional DB env vars | `reports/system_snapshot.json`, `reports/db_smoke.json` |
-| Workflow wrappers | `scripts/workflow/schedule_daily_run.sh`, `scripts/workflow/schedule_daily_run.ps1` | Built-in sample dataset paths | Timestamped `logs/daily-run-*.log`, `reports/run_manifest-*.json`, and consolidated outputs under `reports/` and `output/` |
+| Workflow wrappers | `scripts/workflow/schedule_daily_run.sh`, `scripts/workflow/schedule_daily_run.ps1` | Built-in sample dataset paths | Timestamped `logs/daily-run-*.log`, `reports/step_status-*.csv`, `reports/run_manifest-*.json`, and consolidated outputs under `reports/` and `output/` |
 | Google Sheets | `google-sheets/apps-script/apps_script_validation_rules.gs` | Google Sheet tab (`SHEET_NAME`) | In-sheet validation rules + exported sanitized CSV to Drive folder |
 | Power Query | `powerbi/powerquery/powerquery_data_quality_template.pq` | Power Query source connector/table | DQ columns (`dq_issue`, `dq_status`) for downstream BI filters |
 
 ### Quick verification checklist
 
 1. Run the Python commands above and confirm fresh timestamps in `reports/` and `output/`.
-2. Execute `bash scripts/workflow/schedule_daily_run.sh` and confirm a new `logs/daily-run-*.log` file.
+2. Execute `bash scripts/workflow/schedule_daily_run.sh` and confirm new `logs/daily-run-*.log`, `reports/step_status-*.csv`, and `reports/run_manifest-*.json` files.
 3. Run at least one SQL integrity script against seeded demo data to confirm expected mismatch/duplicate outputs.
 4. For Sheets/Power Query assets, confirm template import executes and outputs validation status columns/exports as expected.
 
