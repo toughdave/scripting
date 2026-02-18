@@ -203,7 +203,10 @@ python scripts/python/data_quality/excel_validate_workbook.py \
 
 # Daily workflow wrappers
 bash scripts/workflow/schedule_daily_run.sh
+# Optional: capped retries per step (example: 2 retries after initial attempt)
+MAX_RETRIES=2 bash scripts/workflow/schedule_daily_run.sh
 # powershell -ExecutionPolicy Bypass -File scripts/workflow/schedule_daily_run.ps1
+# powershell -ExecutionPolicy Bypass -File scripts/workflow/schedule_daily_run.ps1 -MaxRetries 2
 
 # Build run manifest directly (useful after ad-hoc script execution)
 python scripts/python/reporting/run_manifest.py \
@@ -228,7 +231,7 @@ This matrix keeps each script family tied to clear run commands, expected output
 | Reporting + SLA | `sla_at_risk_report.py`, `excel_export_audit_packet.py` | `data/sample/exam_tasks.csv` and student records CSV | `reports/sla_at_risk.csv`, `reports/sla_summary.json`, `reports/audit_packet/*` |
 | ETL | `etl_runner.py` with `data/sample/etl_config.json` | Config + source CSV path | `output` CSV and ETL summary JSON configured in ETL config |
 | Systems | `system_health_snapshot.py`, `db_smoke_test.py` | Host metrics + optional DB env vars | `reports/system_snapshot.json`, `reports/db_smoke.json` |
-| Workflow wrappers | `scripts/workflow/schedule_daily_run.sh`, `scripts/workflow/schedule_daily_run.ps1` | Built-in sample dataset paths | Timestamped `logs/daily-run-*.log`, `reports/step_status-*.csv`, `reports/run_manifest-*.json`, and consolidated outputs under `reports/` and `output/` |
+| Workflow wrappers | `scripts/workflow/schedule_daily_run.sh`, `scripts/workflow/schedule_daily_run.ps1` | Built-in sample dataset paths (+ optional retry cap: `MAX_RETRIES` / `-MaxRetries`) | Timestamped `logs/daily-run-*.log`, `reports/step_status-*.csv` (attempt-aware rows), `reports/run_manifest-*.json` (including `steps_retried`), and consolidated outputs under `reports/` and `output/` |
 | Google Sheets | `google-sheets/apps-script/apps_script_validation_rules.gs` | Google Sheet tab (`SHEET_NAME`) | In-sheet validation rules + exported sanitized CSV to Drive folder |
 | Power Query | `powerbi/powerquery/powerquery_data_quality_template.pq` | Power Query source connector/table | DQ columns (`dq_issue`, `dq_status`) for downstream BI filters |
 
@@ -236,8 +239,9 @@ This matrix keeps each script family tied to clear run commands, expected output
 
 1. Run the Python commands above and confirm fresh timestamps in `reports/` and `output/`.
 2. Execute `bash scripts/workflow/schedule_daily_run.sh` and confirm new `logs/daily-run-*.log`, `reports/step_status-*.csv`, and `reports/run_manifest-*.json` files.
-3. Run at least one SQL integrity script against seeded demo data to confirm expected mismatch/duplicate outputs.
-4. For Sheets/Power Query assets, confirm template import executes and outputs validation status columns/exports as expected.
+3. Re-run with retries enabled (`MAX_RETRIES=2 bash scripts/workflow/schedule_daily_run.sh`) and confirm step rows include `attempt`/`max_attempts` values; when retries occur, confirm `steps_retried` increases in `run_manifest-*.json`.
+4. Run at least one SQL integrity script against seeded demo data to confirm expected mismatch/duplicate outputs.
+5. For Sheets/Power Query assets, confirm template import executes and outputs validation status columns/exports as expected.
 
 ## Portfolio alignment
 

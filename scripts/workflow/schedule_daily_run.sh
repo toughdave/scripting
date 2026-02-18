@@ -5,9 +5,15 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 PYTHON_BIN="${PYTHON_BIN:-python3}"
+MAX_RETRIES="${MAX_RETRIES:-1}"
 LOG_DIR="${REPO_ROOT}/logs"
 REPORT_DIR="${REPO_ROOT}/reports"
 OUTPUT_DIR="${REPO_ROOT}/output"
+
+if ! [[ "${MAX_RETRIES}" =~ ^[0-9]+$ ]]; then
+  echo "MAX_RETRIES must be a non-negative integer (received: ${MAX_RETRIES})" >&2
+  exit 2
+fi
 
 mkdir -p "${LOG_DIR}" "${REPORT_DIR}" "${OUTPUT_DIR}"
 
@@ -17,36 +23,48 @@ MANIFEST_FILE="${REPORT_DIR}/run_manifest-${STAMP}.json"
 STEP_STATUS_FILE="${REPORT_DIR}/step_status-${STAMP}.csv"
 RUN_STATUS="success"
 
-printf "step,exit_code,start_utc,end_utc,duration_seconds,status\n" > "${STEP_STATUS_FILE}"
+printf "step,attempt,max_attempts,exit_code,start_utc,end_utc,duration_seconds,status\n" > "${STEP_STATUS_FILE}"
 
 run_step() {
   local label="$1"
   shift
   local start_epoch end_epoch duration exit_code
   local start_utc end_utc
+  local attempt=1
+  local max_attempts=$((MAX_RETRIES + 1))
 
-  start_epoch="$(date +%s)"
-  start_utc="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  while (( attempt <= max_attempts )); do
+    start_epoch="$(date +%s)"
+    start_utc="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-  echo "[$(date +%F' '%T)] START ${label}" | tee -a "${LOG_FILE}"
+    echo "[$(date +%F' '%T)] START ${label} (attempt ${attempt}/${max_attempts})" | tee -a "${LOG_FILE}"
 
-  set +e
-  "$@" 2>&1 | tee -a "${LOG_FILE}"
-  exit_code=${PIPESTATUS[0]}
-  set -e
+    set +e
+    "$@" 2>&1 | tee -a "${LOG_FILE}"
+    exit_code=${PIPESTATUS[0]}
+    set -e
 
-  end_epoch="$(date +%s)"
-  end_utc="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  duration=$((end_epoch - start_epoch))
+    end_epoch="$(date +%s)"
+    end_utc="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+    duration=$((end_epoch - start_epoch))
 
-  if [[ ${exit_code} -eq 0 ]]; then
-    echo "[$(date +%F' '%T)] DONE  ${label}" | tee -a "${LOG_FILE}"
-    printf "%s,%s,%s,%s,%s,%s\n" "${label}" "${exit_code}" "${start_utc}" "${end_utc}" "${duration}" "success" >> "${STEP_STATUS_FILE}"
-  else
-    echo "[$(date +%F' '%T)] FAIL  ${label} (exit=${exit_code})" | tee -a "${LOG_FILE}"
-    printf "%s,%s,%s,%s,%s,%s\n" "${label}" "${exit_code}" "${start_utc}" "${end_utc}" "${duration}" "failed" >> "${STEP_STATUS_FILE}"
-    RUN_STATUS="failed"
-  fi
+    if [[ ${exit_code} -eq 0 ]]; then
+      echo "[$(date +%F' '%T)] DONE  ${label} (attempt ${attempt}/${max_attempts})" | tee -a "${LOG_FILE}"
+      printf "%s,%s,%s,%s,%s,%s,%s,%s\n" "${label}" "${attempt}" "${max_attempts}" "${exit_code}" "${start_utc}" "${end_utc}" "${duration}" "success" >> "${STEP_STATUS_FILE}"
+      return
+    fi
+
+    echo "[$(date +%F' '%T)] FAIL  ${label} (attempt ${attempt}/${max_attempts}, exit=${exit_code})" | tee -a "${LOG_FILE}"
+    printf "%s,%s,%s,%s,%s,%s,%s,%s\n" "${label}" "${attempt}" "${max_attempts}" "${exit_code}" "${start_utc}" "${end_utc}" "${duration}" "failed" >> "${STEP_STATUS_FILE}"
+
+    if (( attempt < max_attempts )); then
+      echo "[$(date +%F' '%T)] RETRY ${label} (next attempt $((attempt + 1))/${max_attempts})" | tee -a "${LOG_FILE}"
+    else
+      RUN_STATUS="failed"
+    fi
+
+    attempt=$((attempt + 1))
+  done
 }
 
 run_step "csv_profile" \

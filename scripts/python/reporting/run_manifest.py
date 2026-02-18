@@ -53,11 +53,15 @@ def load_steps_csv(path: Path) -> list[dict[str, Any]]:
     with path.open("r", newline="", encoding="utf-8") as fh:
         reader = csv.DictReader(fh)
         for item in reader:
+            attempt_raw = (item.get("attempt") or "").strip()
+            max_attempts_raw = (item.get("max_attempts") or "").strip()
             exit_code_raw = (item.get("exit_code") or "").strip()
             duration_raw = (item.get("duration_seconds") or "").strip()
             rows.append(
                 {
                     "step": (item.get("step") or "").strip(),
+                    "attempt": int(attempt_raw) if attempt_raw.isdigit() else None,
+                    "max_attempts": int(max_attempts_raw) if max_attempts_raw.isdigit() else None,
                     "status": (item.get("status") or "").strip(),
                     "exit_code": int(exit_code_raw) if exit_code_raw.lstrip("-").isdigit() else None,
                     "start_utc": (item.get("start_utc") or "").strip(),
@@ -81,6 +85,7 @@ def main() -> int:
     output_files = collect_files(output_dir)
     steps = load_steps_csv(steps_file) if steps_file else []
     failed_steps = [row for row in steps if row.get("status") == "failed"]
+    retried_steps = [row for row in steps if (row.get("attempt") or 0) > 1]
 
     log_exists = log_file.exists()
     log_size = log_file.stat().st_size if log_exists else 0
@@ -101,6 +106,7 @@ def main() -> int:
             "total_files": len(report_files) + len(output_files),
             "steps_total": len(steps),
             "steps_failed": len(failed_steps),
+            "steps_retried": len(retried_steps),
         },
         "log": {
             "exists": log_exists,

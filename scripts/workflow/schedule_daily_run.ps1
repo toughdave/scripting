@@ -1,5 +1,6 @@
 param(
-  [string]$PythonBin = "python"
+  [string]$PythonBin = "python",
+  [int]$MaxRetries = 1
 )
 
 $ErrorActionPreference = "Stop"
@@ -9,6 +10,10 @@ $RepoRoot = Resolve-Path (Join-Path $ScriptDir "../..")
 $LogDir = Join-Path $RepoRoot "logs"
 $ReportDir = Join-Path $RepoRoot "reports"
 $OutputDir = Join-Path $RepoRoot "output"
+
+if ($MaxRetries -lt 0) {
+  throw "MaxRetries must be a non-negative integer (received: $MaxRetries)"
+}
 
 New-Item -ItemType Directory -Path $LogDir -Force | Out-Null
 New-Item -ItemType Directory -Path $ReportDir -Force | Out-Null
@@ -20,35 +25,45 @@ $ManifestFile = Join-Path $ReportDir "run_manifest-$Stamp.json"
 $StepStatusFile = Join-Path $ReportDir "step_status-$Stamp.csv"
 $script:RunFailed = $false
 
-"step,exit_code,start_utc,end_utc,duration_seconds,status" | Set-Content -Path $StepStatusFile
+"step,attempt,max_attempts,exit_code,start_utc,end_utc,duration_seconds,status" | Set-Content -Path $StepStatusFile
 
 function Run-Step {
   param(
     [string]$Label,
     [string[]]$ArgsList
   )
+  $maxAttempts = $MaxRetries + 1
 
-  $startTime = Get-Date
-  $startUtc = $startTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
-  $start = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] START $Label"
-  $start | Tee-Object -FilePath $LogFile -Append
+  for ($attempt = 1; $attempt -le $maxAttempts; $attempt++) {
+    $startTime = Get-Date
+    $startUtc = $startTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+    $start = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] START $Label (attempt $attempt/$maxAttempts)"
+    $start | Tee-Object -FilePath $LogFile -Append
 
-  & $PythonBin @ArgsList 2>&1 | Tee-Object -FilePath $LogFile -Append
-  $exitCode = if ($null -ne $LASTEXITCODE) { [int]$LASTEXITCODE } else { 0 }
+    & $PythonBin @ArgsList 2>&1 | Tee-Object -FilePath $LogFile -Append
+    $exitCode = if ($null -ne $LASTEXITCODE) { [int]$LASTEXITCODE } else { 0 }
 
-  $endTime = Get-Date
-  $endUtc = $endTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
-  $durationSeconds = [int][Math]::Round(($endTime - $startTime).TotalSeconds)
+    $endTime = Get-Date
+    $endUtc = $endTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+    $durationSeconds = [int][Math]::Round(($endTime - $startTime).TotalSeconds)
 
-  if ($exitCode -eq 0) {
-    $done = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] DONE  $Label"
-    $done | Tee-Object -FilePath $LogFile -Append
-    "$Label,$exitCode,$startUtc,$endUtc,$durationSeconds,success" | Add-Content -Path $StepStatusFile
-  } else {
-    $fail = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] FAIL  $Label (exit=$exitCode)"
+    if ($exitCode -eq 0) {
+      $done = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] DONE  $Label (attempt $attempt/$maxAttempts)"
+      $done | Tee-Object -FilePath $LogFile -Append
+      "$Label,$attempt,$maxAttempts,$exitCode,$startUtc,$endUtc,$durationSeconds,success" | Add-Content -Path $StepStatusFile
+      return
+    }
+
+    $fail = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] FAIL  $Label (attempt $attempt/$maxAttempts, exit=$exitCode)"
     $fail | Tee-Object -FilePath $LogFile -Append
-    "$Label,$exitCode,$startUtc,$endUtc,$durationSeconds,failed" | Add-Content -Path $StepStatusFile
-    $script:RunFailed = $true
+    "$Label,$attempt,$maxAttempts,$exitCode,$startUtc,$endUtc,$durationSeconds,failed" | Add-Content -Path $StepStatusFile
+
+    if ($attempt -lt $maxAttempts) {
+      $retry = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] RETRY $Label (next attempt $($attempt + 1)/$maxAttempts)"
+      $retry | Tee-Object -FilePath $LogFile -Append
+    } else {
+      $script:RunFailed = $true
+    }
   }
 }
 
