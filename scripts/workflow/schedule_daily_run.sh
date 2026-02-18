@@ -27,6 +27,7 @@ STAMP="$(date +%Y%m%d-%H%M%S)"
 LOG_FILE="${LOG_DIR}/daily-run-${STAMP}.log"
 MANIFEST_FILE="${REPORT_DIR}/run_manifest-${STAMP}.json"
 STEP_STATUS_FILE="${REPORT_DIR}/step_status-${STAMP}.csv"
+RUN_HISTORY_FILE="${REPORT_DIR}/run_history_index.json"
 RUN_STATUS="success"
 
 printf "step,attempt,max_attempts,exit_code,start_utc,end_utc,duration_seconds,status\n" > "${STEP_STATUS_FILE}"
@@ -139,6 +140,12 @@ run_step "run_manifest" \
   --log-file "${LOG_FILE}" \
   --steps-file "${STEP_STATUS_FILE}" \
   --manifest "${MANIFEST_FILE}"
+
+run_step "run_history_index" \
+  "${PYTHON_BIN}" "${REPO_ROOT}/scripts/python/reporting/run_history_index.py" \
+  --manifest "${MANIFEST_FILE}" \
+  --history "${RUN_HISTORY_FILE}" \
+  --max-entries "${RETAIN_RUN_ARTIFACTS}"
 
 prune_timestamped_artifacts "${LOG_DIR}" "daily-run-*.log" "logs"
 prune_timestamped_artifacts "${REPORT_DIR}" "run_manifest-*.json" "manifests"

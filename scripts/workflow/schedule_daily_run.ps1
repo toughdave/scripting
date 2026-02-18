@@ -28,6 +28,7 @@ $Stamp = Get-Date -Format "yyyyMMdd-HHmmss"
 $LogFile = Join-Path $LogDir "daily-run-$Stamp.log"
 $ManifestFile = Join-Path $ReportDir "run_manifest-$Stamp.json"
 $StepStatusFile = Join-Path $ReportDir "step_status-$Stamp.csv"
+$RunHistoryFile = Join-Path $ReportDir "run_history_index.json"
 $script:RunFailed = $false
 
 "step,attempt,max_attempts,exit_code,start_utc,end_utc,duration_seconds,status" | Set-Content -Path $StepStatusFile
@@ -150,6 +151,13 @@ Run-Step "run_manifest" @(
   "--log-file", $LogFile,
   "--steps-file", $StepStatusFile,
   "--manifest", $ManifestFile
+)
+
+Run-Step "run_history_index" @(
+  (Join-Path $RepoRoot "scripts/python/reporting/run_history_index.py"),
+  "--manifest", $ManifestFile,
+  "--history", $RunHistoryFile,
+  "--max-entries", "$RetainRunArtifacts"
 )
 
 Prune-TimestampedArtifacts -Directory $LogDir -Pattern "daily-run-*.log" -Label "logs"
