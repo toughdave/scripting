@@ -6,12 +6,18 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 
 PYTHON_BIN="${PYTHON_BIN:-python3}"
 MAX_RETRIES="${MAX_RETRIES:-1}"
+RETAIN_RUN_ARTIFACTS="${RETAIN_RUN_ARTIFACTS:-15}"
 LOG_DIR="${REPO_ROOT}/logs"
 REPORT_DIR="${REPO_ROOT}/reports"
 OUTPUT_DIR="${REPO_ROOT}/output"
 
 if ! [[ "${MAX_RETRIES}" =~ ^[0-9]+$ ]]; then
   echo "MAX_RETRIES must be a non-negative integer (received: ${MAX_RETRIES})" >&2
+  exit 2
+fi
+
+if ! [[ "${RETAIN_RUN_ARTIFACTS}" =~ ^[1-9][0-9]*$ ]]; then
+  echo "RETAIN_RUN_ARTIFACTS must be a positive integer (received: ${RETAIN_RUN_ARTIFACTS})" >&2
   exit 2
 fi
 
@@ -67,6 +73,24 @@ run_step() {
   done
 }
 
+prune_timestamped_artifacts() {
+  local directory="$1"
+  local pattern="$2"
+  local label="$3"
+  local -a files=()
+
+  mapfile -t files < <(ls -1t "${directory}"/${pattern} 2>/dev/null || true)
+  if (( ${#files[@]} <= RETAIN_RUN_ARTIFACTS )); then
+    return
+  fi
+
+  for file in "${files[@]:RETAIN_RUN_ARTIFACTS}"; do
+    rm -f -- "${file}"
+  done
+
+  echo "[$(date +%F' '%T)] RETAIN ${label} kept=${RETAIN_RUN_ARTIFACTS} removed=$(( ${#files[@]} - RETAIN_RUN_ARTIFACTS ))" | tee -a "${LOG_FILE}"
+}
+
 run_step "csv_profile" \
   "${PYTHON_BIN}" "${REPO_ROOT}/scripts/python/data_quality/csv_profile.py" \
   --input "${REPO_ROOT}/data/sample/student_records_source.csv" \
@@ -115,6 +139,10 @@ run_step "run_manifest" \
   --log-file "${LOG_FILE}" \
   --steps-file "${STEP_STATUS_FILE}" \
   --manifest "${MANIFEST_FILE}"
+
+prune_timestamped_artifacts "${LOG_DIR}" "daily-run-*.log" "logs"
+prune_timestamped_artifacts "${REPORT_DIR}" "run_manifest-*.json" "manifests"
+prune_timestamped_artifacts "${REPORT_DIR}" "step_status-*.csv" "step_status"
 
 echo "[$(date +%F' '%T)] Daily run complete. Status: ${RUN_STATUS} Log: ${LOG_FILE} Manifest: ${MANIFEST_FILE} Steps: ${STEP_STATUS_FILE}" | tee -a "${LOG_FILE}"
 

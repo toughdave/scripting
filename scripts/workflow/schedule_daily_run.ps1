@@ -1,6 +1,7 @@
 param(
   [string]$PythonBin = "python",
-  [int]$MaxRetries = 1
+  [int]$MaxRetries = 1,
+  [int]$RetainRunArtifacts = 15
 )
 
 $ErrorActionPreference = "Stop"
@@ -13,6 +14,10 @@ $OutputDir = Join-Path $RepoRoot "output"
 
 if ($MaxRetries -lt 0) {
   throw "MaxRetries must be a non-negative integer (received: $MaxRetries)"
+}
+
+if ($RetainRunArtifacts -lt 1) {
+  throw "RetainRunArtifacts must be a positive integer (received: $RetainRunArtifacts)"
 }
 
 New-Item -ItemType Directory -Path $LogDir -Force | Out-Null
@@ -65,6 +70,29 @@ function Run-Step {
       $script:RunFailed = $true
     }
   }
+}
+
+function Prune-TimestampedArtifacts {
+  param(
+    [string]$Directory,
+    [string]$Pattern,
+    [string]$Label
+  )
+
+  $files = Get-ChildItem -Path $Directory -Filter $Pattern -File -ErrorAction SilentlyContinue |
+    Sort-Object LastWriteTime -Descending
+
+  if ($null -eq $files -or $files.Count -le $RetainRunArtifacts) {
+    return
+  }
+
+  $toRemove = $files | Select-Object -Skip $RetainRunArtifacts
+  foreach ($item in $toRemove) {
+    Remove-Item -Path $item.FullName -Force
+  }
+
+  $retainLog = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] RETAIN $Label kept=$RetainRunArtifacts removed=$($toRemove.Count)"
+  $retainLog | Tee-Object -FilePath $LogFile -Append
 }
 
 Run-Step "csv_profile" @(
@@ -123,6 +151,10 @@ Run-Step "run_manifest" @(
   "--steps-file", $StepStatusFile,
   "--manifest", $ManifestFile
 )
+
+Prune-TimestampedArtifacts -Directory $LogDir -Pattern "daily-run-*.log" -Label "logs"
+Prune-TimestampedArtifacts -Directory $ReportDir -Pattern "run_manifest-*.json" -Label "manifests"
+Prune-TimestampedArtifacts -Directory $ReportDir -Pattern "step_status-*.csv" -Label "step_status"
 
 "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] Daily run complete. Status: $(if ($script:RunFailed) { 'failed' } else { 'success' }) Log: $LogFile Manifest: $ManifestFile Steps: $StepStatusFile" | Tee-Object -FilePath $LogFile -Append
 
