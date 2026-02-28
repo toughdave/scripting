@@ -84,6 +84,14 @@ def main() -> int:
 
     date_columns = {normalize_header(col) for col in args.date_columns}
     dedupe_keys = [normalize_header(col) for col in args.dedupe_keys]
+    if args.drop_duplicates:
+        missing_dedupe_keys = [col for col in dedupe_keys if col not in normalized_headers]
+        if missing_dedupe_keys:
+            raise ValueError(
+                "Invalid --dedupe-keys value(s): "
+                f"{', '.join(missing_dedupe_keys)}. "
+                f"Available columns: {', '.join(normalized_headers)}"
+            )
 
     cleaned_rows = []
     seen = set()
