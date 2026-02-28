@@ -152,13 +152,16 @@ def parse_args() -> argparse.Namespace:
         "--threshold",
         type=float,
         default=0.86,
-        help="Minimum fuzzy score accepted as a match",
+        help="Minimum fuzzy score accepted as a match (0.0 to 1.0)",
     )
     return parser.parse_args()
 
 
 def main() -> int:
     args = parse_args()
+
+    if not 0.0 <= args.threshold <= 1.0:
+        raise ValueError(f"--threshold must be between 0.0 and 1.0 inclusive (received: {args.threshold})")
 
     source_path = Path(args.source)
     target_path = Path(args.target)
