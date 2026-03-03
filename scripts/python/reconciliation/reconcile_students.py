@@ -67,6 +67,11 @@ def main() -> int:
     output_path = Path(args.output)
     summary_path = Path(args.summary)
 
+    if not source_path.exists():
+        raise FileNotFoundError(f"Source CSV not found: {source_path}")
+    if not target_path.exists():
+        raise FileNotFoundError(f"Target CSV not found: {target_path}")
+
     source_rows = read_rows(source_path)
     target_rows = read_rows(target_path)
 
